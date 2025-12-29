@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:replace="layout/head :: head"></th:block>
 
 <body class="hold-transition login-page">
 
@@ -76,6 +77,6 @@
     </div>
   </div>
 </div>
-
+<th:block th:replace="layout/script :: script"></th:block>
 </body>
 </html>
