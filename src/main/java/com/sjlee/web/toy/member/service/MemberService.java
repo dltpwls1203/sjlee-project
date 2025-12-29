@@ -16,7 +16,7 @@ public class MemberService {
 
     public MemberResponse registerMember(MemberCreateRequest request) {
 
-        if (memberRepository.existsByUserId(request.getUserId())) {
+        if (memberRepository.existsByUserId(request.getEmail())) {
             throw new DuplicateUserIdException();
         }
 
@@ -26,7 +26,7 @@ public class MemberService {
 
         return MemberResponse.builder()
                 .id(member.getId())
-                .userId(member.getUserId())
+                .email(member.getEmail())
                 .status(member.getStatus().name())
                 .build();
     }

@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class ApiExceptionHandler {
 
     @ExceptionHandler(DuplicateUserIdException.class)
-    public ResponseEntity<ApiResponse<Void>> handleDuplicateUserId() {
+    public ResponseEntity<ApiResponse<Void>> handleDuplicateEmail() {
         return ResponseEntity
                 .status(HttpStatus.CONFLICT)
                 .body(ApiResponse.fail(
-                        "DUPLICATE_USER_ID",
+                        "DUPLICATE_EMAIL",
                         "이미 사용 중인 아이디입니다"
                 ));
     }

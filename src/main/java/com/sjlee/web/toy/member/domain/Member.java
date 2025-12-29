@@ -12,42 +12,44 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;                    // PK
+    private Long id;                // PK
 
-    private String userId;              // UNIQUE
-    private String userPw;
-    private String userNm;
+    @Column(nullable = false, unique = true)
+    private String email;           // 로그인 ID
+
+    private String password;        // LOCAL 로그인만 사용 (소셜은 null 가능)
+
+    private String name;
     private LocalDate birthDate;
-    private String userPhone;
+    private String phone;
 
     @Enumerated(EnumType.STRING)
     private MemberRole role;
-    @Enumerated(EnumType.STRING)// enum
-    private MemberStatus status;        // enum
+
+    @Enumerated(EnumType.STRING)
+    private MemberStatus status;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-
-    private String createdId;
-    private String updatedId;
-
     private LocalDateTime withdrawnAt;
 
     private int loginFailCnt;
     private boolean locked;
     private LocalDateTime lockedAt;
 
+    protected Member() {}
+
     public static Member create(MemberCreateRequest request) {
         Member member = new Member();
 
-        member.userId = request.getUserId();
-        member.userPw = request.getPassword();   // 암호화는 Service에서
-        member.userNm = request.getUserNm();
+        member.email = request.getEmail();
+        member.password = request.getPassword();    // 암호화는 Service에서
+        member.name = request.getName();
         member.birthDate = request.getBirthDate();
-        member.userPhone = request.getUserPhone();
+        member.phone = request.getPhone();
 
-        member.role = MemberRole.USER;            // 기본 권한
-        member.status = MemberStatus.ACTIVE;      // 가입 시 ACTIVE
+        member.role = MemberRole.USER;
+        member.status = MemberStatus.ACTIVE;
 
         member.createdAt = LocalDateTime.now();
         member.updatedAt = LocalDateTime.now();

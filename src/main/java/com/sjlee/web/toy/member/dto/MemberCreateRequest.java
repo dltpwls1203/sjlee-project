@@ -8,9 +8,9 @@ import java.time.LocalDate;
 @Getter
 @NoArgsConstructor
 public class MemberCreateRequest {
-    private String userId;
+    private String email;
     private String password;
-    private String userNm;
+    private String name;
     private LocalDate birthDate;
-    private String userPhone;
+    private String phone;
 }
