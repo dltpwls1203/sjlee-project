@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.member.controller;
+package com.sjlee.web.toy.controller.api;
 
 import com.sjlee.web.toy.common.response.ApiResponse;
 import com.sjlee.web.toy.member.dto.MemberCreateRequest;
@@ -7,7 +7,6 @@ import com.sjlee.web.toy.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
