@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private static final int MAX_LOGIN_FAIL_CNT = 5;
 
     public MemberResponse registerMember(MemberCreateRequest request) {
 
@@ -44,6 +45,11 @@ public class MemberServiceImpl implements MemberService {
 
         if (member.isLocked()) {
             throw new LoginFailException("계정이 잠겨 있습니다.");
+        }
+
+        if (!member.getPassword().equals(request.getPassword())) {
+            member.increaseLoginFailCnt(MAX_LOGIN_FAIL_CNT);
+            throw new LoginFailException("비밀번호가 올바르지 않습니다.");
         }
 
         resetLoginFailCnt(member);

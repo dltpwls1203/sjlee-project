@@ -61,4 +61,19 @@ public class Member {
 
         return member;
     }
+
+    // 로그인 실패 처리
+    public void increaseLoginFailCnt(int maxFailCnt) {
+        this.loginFailCnt++;
+
+        if (this.loginFailCnt >= maxFailCnt) {
+            this.locked = true;
+        }
+    }
+
+    // 로그인 성공 처리
+    public void resetLoginFailCnt() {
+        this.loginFailCnt = 0;
+        this.locked = false;
+    }
 }

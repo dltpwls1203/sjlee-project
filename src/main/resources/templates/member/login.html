@@ -15,12 +15,17 @@
     <div class="card-body login-card-body">
       <p class="login-box-msg">Sign in to start your session</p>
 
-      <!-- 로그인 폼 -->
-      <form th:action="@{/login}" method="post">
+      <!-- 에러 메시지 영역 (JS에서 제어) -->
+      <div id="loginError"
+           class="alert alert-danger"
+           style="display:none;"></div>
 
+      <!-- 로그인 폼 -->
+      <form id="loginForm">
         <div class="input-group mb-3">
           <input type="text"
-                 name="Email"
+                 id="email"
+                 name="email"
                  class="form-control"
                  placeholder="Email"
                  required>
@@ -33,6 +38,7 @@
 
         <div class="input-group mb-3">
           <input type="password"
+                 id="password"
                  name="password"
                  class="form-control"
                  placeholder="Password"
@@ -55,7 +61,8 @@
           </div>
 
           <div class="col-4">
-            <button type="submit"
+            <button type="button"
+                    id="loginBtn"
                     class="btn btn-primary btn-block">
               Sign In
             </button>
@@ -77,6 +84,7 @@
     </div>
   </div>
 </div>
-<th:block th:replace="layout/script :: script"></th:block>
 </body>
+
+<script th:src="@{/js/member/login.js}"></script>
 </html>

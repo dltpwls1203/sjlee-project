@@ -3,7 +3,7 @@ package com.sjlee.web.toy.member.exception;
 public class LoginFailException extends RuntimeException{
 
     public LoginFailException() {
-        super("아이디 또는 비밀번호가 올바르지 않습니다.");
+        super("존재하지 않는 아이디 입니다.");
     }
 
     public LoginFailException(String message) {
