@@ -1,0 +1,37 @@
+package com.sjlee.web.toy.controller.admin;
+
+import com.sjlee.web.toy.member.domain.AdminMenu;
+import com.sjlee.web.toy.member.domain.Member;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.Arrays;
+import java.util.List;
+
+@ControllerAdvice(assignableTypes = {
+        AdminDashboardController.class,
+        // 나중에 AdminMemberController.class 등 추가
+})
+public class AdminMenuAdvice {
+    public static final String LOGIN_MEMBER = "LOGIN_MEMBER";
+
+    @ModelAttribute
+    public void addAdminMenus(HttpServletRequest request, HttpSession session, Model model) {
+
+        model.addAttribute("currentUri", request.getRequestURI());
+
+        Member member = (Member) session.getAttribute(LOGIN_MEMBER);
+        if (member == null) return;
+
+        List<AdminMenu> menus = Arrays.stream(AdminMenu.values())
+                .filter(menu ->
+                        member.getRole().hasPermission(menu.getPermission())
+                )
+                .toList();
+
+        model.addAttribute("menus", menus);
+    }
+}
