@@ -1,0 +1,47 @@
+package com.sjlee.web.toy.opponentTeam.domain;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
+
+@Getter
+@NoArgsConstructor(access = lombok.AccessLevel.PROTECTED)
+@Entity
+@Table(name = "opponent_team")
+public class OpponentTeam {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;    // 상대팀 아이디
+
+    @Column(nullable = false, length = 100)
+    private String name;    // 상대팀 명
+
+    @Column(name = "contact_info", length = 100)
+    private String contactInfo;    // 연락처 정보
+
+    @Column(name = "skill_level", length = 20)
+    private String skillLevel;     // 체감 실력 (LOW / MID / HIGH 등)
+
+    @Column(length = 200)
+    private String note;            // 비고
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    // ===== 생성 시 기본값 세팅 =====
+    @PrePersist
+    private void prePersist() {
+        this.createdAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void preUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
+}
