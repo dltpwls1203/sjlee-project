@@ -38,7 +38,7 @@ class MatchServiceImplTest {
                         2,
                         1,
                         MatchStatus.DONE,
-                        10
+                        10L
                 )
         );
 

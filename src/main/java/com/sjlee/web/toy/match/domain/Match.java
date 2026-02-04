@@ -28,6 +28,7 @@ public class Match {
     @Column(name = "match_at", nullable = false)
     private LocalDateTime matchAt;   // 매치 일시
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private MatchStatus status;    // SCHEDULED / DONE / CANCELED / POSTPONE
 

@@ -25,7 +25,9 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
            and a.attendStatus in ('ATTEND', 'LATE')
         left join OpponentTeam ot
             on ot.id = m.opponentTeamId
-        group by m.id, ot.name
+        group by m.id,
+                 m.matchAt,
+                 ot.name
         order by m.matchAt desc
     """)
     List<MatchList> findMatchList();
