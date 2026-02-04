@@ -13,6 +13,7 @@ import java.util.List;
 
 @ControllerAdvice(assignableTypes = {
         AdminDashboardController.class,
+        MatchAdminController.class
         // 나중에 AdminMemberController.class 등 추가
 })
 public class AdminMenuAdvice {
