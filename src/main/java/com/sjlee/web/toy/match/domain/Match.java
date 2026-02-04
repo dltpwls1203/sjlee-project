@@ -29,7 +29,7 @@ public class Match {
     private LocalDateTime matchAt;   // 매치 일시
 
     @Column(nullable = false, length = 20)
-    private String status;    // SCHEDULED / DONE / CANCELED / POSTPONE
+    private MatchStatus status;    // SCHEDULED / DONE / CANCELED / POSTPONE
 
     @Column(name = "our_score", nullable = false)
     private Integer ourScore; // 우리팀 점수
@@ -47,7 +47,7 @@ public class Match {
     @PrePersist
     private void prePersist() {
         this.createdAt = LocalDateTime.now();
-        this.status = (this.status == null) ? "SCHEDULED" : this.status;
+        this.status = (this.status == null) ? MatchStatus.DONE : this.status;
         this.ourScore = (this.ourScore == null) ? 0 : this.ourScore;
         this.opponentScore = (this.opponentScore == null) ? 0 : this.opponentScore;
     }

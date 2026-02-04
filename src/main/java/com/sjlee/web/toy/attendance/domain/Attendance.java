@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.Attendance.domain;
+package com.sjlee.web.toy.attendance.domain;
 
 import jakarta.persistence.*;
 import lombok.Getter;

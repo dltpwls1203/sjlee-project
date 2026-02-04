@@ -4,11 +4,13 @@ import java.util.Set;
 
 public enum MemberRole {
     SUPER_ADMIN(Set.of(
-            Permission.ADMIN_DASHBOARD
+            Permission.ADMIN_DASHBOARD,
+            Permission.ADMIN_MATCH
     )),
 
     ADMIN(Set.of(
-            Permission.ADMIN_DASHBOARD
+            Permission.ADMIN_DASHBOARD,
+            Permission.ADMIN_MATCH
     )),
 
     USER(Set.of()); // 관리자 메뉴 없음
