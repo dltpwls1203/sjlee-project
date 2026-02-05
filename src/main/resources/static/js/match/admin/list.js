@@ -60,13 +60,15 @@ function renderMatchList(matches) {
         return;
     }
 
-    tbody.innerHTML = matches.map(match => createMatchRow(match)).join("");
+    tbody.innerHTML = matches
+        .map((match, index) => createMatchRow(match, index))
+        .join("");
 }
 
-function createMatchRow(match) {
+function createMatchRow(match, index) {
     return `
         <tr>
-            <td>${match.id}</td>
+            <td>${index + 1}</td> <!-- 화면용 번호 -->
             <td>${formatDate(match.matchAt)}</td>
             <td>${match.opponentName}</td>
             <td>${match.ourScore} : ${match.opponentScore}</td>

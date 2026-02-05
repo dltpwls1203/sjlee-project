@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 public class MatchList {
-    private final Long matchId;             // 경기 ID
+    private final Long id;                  // 경기 ID
     private final LocalDateTime matchAt;    // 경기 일시
     private final String opponentTeamName;  // 상대팀 명
     private final Integer ourScore;         // 우리팀 점수

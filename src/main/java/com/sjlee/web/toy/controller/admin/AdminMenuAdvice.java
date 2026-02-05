@@ -1,7 +1,5 @@
-package com.sjlee.web.toy.common.web.admin;
+package com.sjlee.web.toy.controller.admin;
 
-import com.sjlee.web.toy.dashboard.admin.AdminDashboardController;
-import com.sjlee.web.toy.match.controller.MatchAdminController;
 import com.sjlee.web.toy.member.domain.AdminMenu;
 import com.sjlee.web.toy.member.domain.Member;
 import jakarta.servlet.http.HttpServletRequest;
