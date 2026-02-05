@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.controller.api;
+package com.sjlee.web.toy.member.controller.api;
 
 import com.sjlee.web.toy.common.response.ApiResponse;
 import com.sjlee.web.toy.member.domain.Member;
