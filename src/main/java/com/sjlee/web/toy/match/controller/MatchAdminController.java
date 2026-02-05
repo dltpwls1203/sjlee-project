@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.controller.admin;
+package com.sjlee.web.toy.match.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,5 +14,13 @@ public class MatchAdminController {
     @GetMapping
     public String matchList() {
         return "admin/match/list";
+    }
+
+    /**
+     * 관리자 경기 등록 화면
+     */
+    @GetMapping("/new")
+    public String createMatchForm() {
+        return "admin/match/form";
     }
 }

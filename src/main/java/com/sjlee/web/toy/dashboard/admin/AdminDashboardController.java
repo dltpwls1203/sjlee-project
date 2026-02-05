@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.controller.admin;
+package com.sjlee.web.toy.dashboard.admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
