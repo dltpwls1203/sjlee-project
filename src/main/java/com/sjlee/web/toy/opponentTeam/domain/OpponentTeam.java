@@ -34,6 +34,9 @@ public class OpponentTeam {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "use_yn")
+    private String useYn;
+
     // ===== 생성 시 기본값 세팅 =====
     @PrePersist
     private void prePersist() {
