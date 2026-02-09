@@ -4,6 +4,7 @@ import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.domain.MatchStatus;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.repository.MatchRepository;
+import com.sjlee.web.toy.match.service.MatchService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -22,7 +23,7 @@ import static org.mockito.Mockito.*;
 class MatchServiceImplTest {
 
     @InjectMocks
-    private MatchServiceImpl matchService;
+    private MatchService matchService;
 
     @Mock
     private MatchRepository matchRepository;

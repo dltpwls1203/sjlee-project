@@ -2,13 +2,22 @@ package com.sjlee.web.toy.opponentTeam.service;
 
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.opponentTeam.dto.OpponentTeamSelect;
+import com.sjlee.web.toy.opponentTeam.repository.OpponentTeamRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public interface OpponentTeamService {
+@Service
+@RequiredArgsConstructor
+public class OpponentTeamService {
+
+    private final OpponentTeamRepository opponentTeamRepository;
 
     /**
      * 상대팀 목록 조회
      */
-    List<OpponentTeamSelect> getOpponentTeams();
+    public List<OpponentTeamSelect> getOpponentTeams() {
+        return opponentTeamRepository.findSelectItems();
+    }
 }
