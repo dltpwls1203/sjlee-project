@@ -16,6 +16,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             ot.name,
             m.ourScore,
             m.opponentScore,
+            m.result,
             m.status,
             count(a.id)
         )

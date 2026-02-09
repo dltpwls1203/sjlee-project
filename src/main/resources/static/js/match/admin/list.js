@@ -69,11 +69,12 @@ function createMatchRow(match, index) {
     return `
         <tr>
             <td>${index + 1}</td> <!-- 화면용 번호 -->
-            <td>${formatDate(match.matchAt)}</td>
-            <td>${match.opponentName}</td>
+            <td>${formatDateWithDay(match.matchAt)}</td>
+            <td>${match.opponentTeamName}</td>
             <td>${match.ourScore} : ${match.opponentScore}</td>
+            <td>${renderResult(match.result)}</td>
             <td>${match.status}</td>
-            <td>${match.attendanceCount}</td>
+            <td>${match.attendCount}</td>
         </tr>
     `;
 }
@@ -82,11 +83,38 @@ function createMatchRow(match, index) {
  * Utils
  * ===================== */
 
-function formatDate(date) {
-    if (!date) return "-";
-    return date.replaceAll("-", ".");
+function formatDateWithDay(isoDate) {
+    if (!isoDate) return "-";
+
+    const d = new Date(isoDate);
+
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+
+    const days = ["일", "월", "화", "수", "목", "금", "토"];
+    const day = days[d.getDay()];
+
+    const hh = String(d.getHours()).padStart(2, "0");
+    const min = String(d.getMinutes()).padStart(2, "0");
+
+    return `${yyyy}.${mm}.${dd} (${day}) ${hh}:${min}`;
 }
 
 function showError(message) {
     alert(message); // 추후 공통 error UI로 교체 가능
+}
+
+function renderResult(result) {
+    if (!result) {
+        return `<span class="badge bg-secondary">-</span>`;
+    }
+
+    const map = {
+        WIN:  `<span class="badge bg-success">승</span>`,
+        DRAW: `<span class="badge bg-warning">무</span>`,
+        LOSE: `<span class="badge bg-danger">패</span>`
+    };
+
+    return map[result] ?? `<span class="badge bg-secondary">-</span>`;
 }

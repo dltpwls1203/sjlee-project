@@ -34,17 +34,23 @@ public class OpponentTeam {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "use_yn")
+    @Column(name = "use_yn", nullable = false, length = 1)
     private String useYn;
+
 
     // ===== 생성 시 기본값 세팅 =====
     @PrePersist
     private void prePersist() {
         this.createdAt = LocalDateTime.now();
+        this.useYn = "Y";
     }
 
     @PreUpdate
     private void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void deactivate() {
+        this.useYn = "N";
     }
 }

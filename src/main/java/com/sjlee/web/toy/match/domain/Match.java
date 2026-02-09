@@ -38,11 +38,16 @@ public class Match {
     @Column(name = "opponent_score", nullable = false)
     private Integer opponentScore; // 상대팀 점수
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "result", length = 10)
+    private MatchResult result; // 상대팀 점수
+
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
 
     // ===== 생성 시 기본값 세팅 =====
     @PrePersist
