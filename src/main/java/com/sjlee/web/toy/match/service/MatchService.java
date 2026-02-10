@@ -1,6 +1,7 @@
 package com.sjlee.web.toy.match.service;
 
 import com.sjlee.web.toy.match.domain.Match;
+import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.repository.MatchRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 public class MatchService {
 
     private final MatchRepository matchRepository;
+
     /**
      * 경기 목록 조회
      */
@@ -28,4 +30,13 @@ public class MatchService {
     public Long createMatch(Match match) {
         return matchRepository.save(match).getId();
     }
+
+
+    /**
+     * 경기 상세 조회
+     */
+    public MatchDetail getMatchDetail(Long matchId) {
+        return matchRepository.findMatchDetail(matchId);
+    }
+
 }

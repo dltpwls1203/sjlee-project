@@ -70,11 +70,20 @@ function createMatchRow(match, index) {
         <tr>
             <td>${index + 1}</td> <!-- 화면용 번호 -->
             <td>${formatDateWithDay(match.matchAt)}</td>
+            <td>${match.groundName} (${match.playersPerTeam} vs ${match.playersPerTeam})</td>
             <td>${match.opponentTeamName}</td>
             <td>${match.ourScore} : ${match.opponentScore}</td>
             <td>${renderResult(match.result)}</td>
             <td>${match.status}</td>
             <td>${match.attendCount}</td>
+            <td class="text-center">
+                <button type="button"
+                        class="btn btn-sm btn-outline-primary"
+                        title="상세보기"
+                        onclick="goToMatchDetail(${match.matchId})">
+                    <i class="fas fa-search"></i>
+                </button>
+            </td>
         </tr>
     `;
 }
@@ -117,4 +126,8 @@ function renderResult(result) {
     };
 
     return map[result] ?? `<span class="badge bg-secondary">-</span>`;
+}
+
+function goToMatchDetail(matchId) {
+    window.location.href = `/admin/matches/detail/${matchId}`;
 }
