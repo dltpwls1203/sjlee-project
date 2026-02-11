@@ -1,6 +1,5 @@
 package com.sjlee.web.toy.opponentTeam.service;
 
-import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.opponentTeam.dto.OpponentTeamSelect;
 import com.sjlee.web.toy.opponentTeam.repository.OpponentTeamRepository;
 import lombok.RequiredArgsConstructor;

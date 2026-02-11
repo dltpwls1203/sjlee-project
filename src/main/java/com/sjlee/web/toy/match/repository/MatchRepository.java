@@ -50,8 +50,10 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
         select new com.sjlee.web.toy.match.dto.MatchDetail(
             m.id,
             m.matchAt,
+            g.id,
             g.name,
             g.playersPerTeam,
+            ot.id,
             ot.name,
             m.ourScore,
             m.opponentScore,
@@ -80,7 +82,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             m.opponentScore,
             m.result,
             m.status
-    """)
+   \s""")
     MatchDetail findMatchDetail(@Param("matchId") Long matchId);
 
 }

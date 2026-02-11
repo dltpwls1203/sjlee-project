@@ -1,8 +1,5 @@
 package com.sjlee.web.toy.match.controller;
 
-import com.sjlee.web.toy.match.dto.MatchDetail;
-import com.sjlee.web.toy.match.service.MatchService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

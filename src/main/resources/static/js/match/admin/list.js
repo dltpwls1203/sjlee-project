@@ -26,7 +26,7 @@ async function loadMatchList() {
 }
 
 /* =====================
- * API
+ * 매치 목록 API
  * ===================== */
 
 async function fetchMatchList() {
@@ -54,7 +54,7 @@ function renderMatchList(matches) {
     if (!matches || matches.length === 0) {
         tbody.innerHTML = `
             <tr>
-                <td colspan="6" class="text-center">등록된 경기가 없습니다.</td>
+                <td colspan="8" class="text-center">등록된 경기가 없습니다.</td>
             </tr>
         `;
         return;
@@ -72,16 +72,15 @@ function createMatchRow(match, index) {
             <td>${formatDateWithDay(match.matchAt)}</td>
             <td>${match.groundName} (${match.playersPerTeam} vs ${match.playersPerTeam})</td>
             <td>${match.opponentTeamName}</td>
-            <td>${match.ourScore} : ${match.opponentScore}</td>
-            <td>${renderResult(match.result)}</td>
+            <td>${renderResult(match.result)} ( ${match.ourScore} : ${match.opponentScore} )</td>
             <td>${match.status}</td>
-            <td>${match.attendCount}</td>
+            <td>${match.attendanceCount}</td>
             <td class="text-center">
                 <button type="button"
                         class="btn btn-sm btn-outline-primary"
                         title="상세보기"
                         onclick="goToMatchDetail(${match.matchId})">
-                    <i class="fas fa-search"></i>
+                    <i class="fas fa-search">상세</i>
                 </button>
             </td>
         </tr>
@@ -89,7 +88,7 @@ function createMatchRow(match, index) {
 }
 
 /* =====================
- * Utils
+ * 날짜 포멧
  * ===================== */
 
 function formatDateWithDay(isoDate) {

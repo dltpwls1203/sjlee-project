@@ -19,7 +19,7 @@ function initMatchDetail() {
 }
 
 /* =====================
- * Load Detail
+ * 경기 상세 정보
  * ===================== */
 
 async function loadMatchDetail() {
@@ -42,18 +42,21 @@ async function loadMatchDetail() {
     }
 }
 
+
 function bindDetail(data) {
     setValue("matchAt", data.matchAt);
+    setValue("groundId", data.groundId);
+    setValue("opponentTeamId", data.opponentTeamId);
     setValue("status", data.status);
     setValue("ourScore", data.ourScore);
     setValue("opponentScore", data.opponentScore);
-    setValue("attendCount", data.attendCount);
+    setValue("attendanceCount", data.attendanceCount);
 
     handleStatusChange();
 }
 
 /* =====================
- * Select Options
+ * 구장 선택 옵션
  * ===================== */
 
 async function loadGrounds() {
@@ -67,6 +70,10 @@ async function loadGrounds() {
         select.appendChild(createOption(ground.id, ground.name))
     );
 }
+
+/* =====================
+ * 상대팀 선택 옵션
+ * ===================== */
 
 async function loadOpponentTeams() {
     const response = await fetch("/api/opponent-teams");
@@ -88,7 +95,7 @@ function createOption(value, text) {
 }
 
 /* =====================
- * Edit Mode
+ * 수정 모드
  * ===================== */
 
 function enableEditMode() {

@@ -17,11 +17,6 @@
         <!-- 페이지 헤더 -->
         <section class="content-header">
             <h1>경기 목록</h1>
-
-            <!-- 등록 버튼 -->
-            <a href="/admin/matches/new" class="btn btn-primary">
-                경기 등록
-            </a>
         </section>
 
         <!-- 본문 -->
@@ -29,6 +24,11 @@
             <div class="card">
 
                 <div class="card-body">
+                    <div class="text-right mb-2">
+                        <a href="/admin/matches/new" class="btn btn-primary">
+                            경기 등록
+                        </a>
+                    </div>
 
                     <table class="table table-bordered">
                         <thead>
@@ -37,8 +37,7 @@
                             <th>경기일</th>
                             <th>경기장소</th>
                             <th>상대팀</th>
-                            <th>스코어</th>
-                            <th>결과</th>
+                            <th>결과 (스코어)</th>
                             <th>상태</th>
                             <th>참석자 수</th>
                             <th>상세</th>
@@ -48,7 +47,7 @@
                         <!-- JS 렌더링 영역 -->
                         <tbody id="matchTableBody">
                         <tr>
-                            <td colspan="6" class="text-center">로딩 중...</td>
+                            <td colspan="8" class="text-center">로딩 중...</td>
                         </tr>
                         </tbody>
                     </table>

@@ -6,7 +6,6 @@ import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.service.MatchService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

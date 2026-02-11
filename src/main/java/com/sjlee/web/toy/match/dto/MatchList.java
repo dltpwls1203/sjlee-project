@@ -19,6 +19,6 @@ public class MatchList {
     private final Integer opponentScore;    // 상대팀 점수
     private final MatchResult result;       // 경기 결과
     private final MatchStatus status;       // 경기 상태 (SCHEDULED / DONE / CANCELED / POSTPONE)
-    private final Long attendCount;         // 출석 인원 수 (ATTEND + LATE)
+    private final Long attendanceCount;         // 출석 인원 수 (ATTEND + LATE)
 
 }
