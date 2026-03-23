@@ -138,6 +138,42 @@
   </div>
 </div>
 
+<!-- Attendance Modal -->
+<div class="modal fade" id="attendanceModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">출석 인원 명단</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <table class="table table-bordered table-sm">
+          <thead>
+          <tr>
+            <th>#</th>
+            <th>이름</th>
+            <th>상태</th>
+          </tr>
+          </thead>
+          <tbody id="attendanceTableBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          닫기
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- matchId 주입 -->
 <script th:inline="javascript">
   const matchId = /*[[${matchId}]]*/ 0;

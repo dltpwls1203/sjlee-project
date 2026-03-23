@@ -71,9 +71,9 @@ function createMatchRow(match, index) {
             <td>${index + 1}</td> <!-- 화면용 번호 -->
             <td>${formatDateWithDay(match.matchAt)}</td>
             <td>${match.groundName} (${match.playersPerTeam} vs ${match.playersPerTeam})</td>
-            <td>${match.opponentTeamName}</td>
-            <td>${renderResult(match.result)} ( ${match.ourScore} : ${match.opponentScore} )</td>
-            <td>${match.status}</td>
+            <td>${renderOpponentName(match.opponentTeamName, match.matchType)}</td>
+            <td>${renderResult(match.result, match.matchType, match.ourScore, match.opponentScore)}</td>
+            <td>${renderStatus(match.status)}</td>
             <td>${match.attendanceCount}</td>
             <td class="text-center">
                 <button type="button"
@@ -90,7 +90,6 @@ function createMatchRow(match, index) {
 /* =====================
  * 날짜 포멧
  * ===================== */
-
 function formatDateWithDay(isoDate) {
     if (!isoDate) return "-";
 
@@ -113,9 +112,14 @@ function showError(message) {
     alert(message); // 추후 공통 error UI로 교체 가능
 }
 
-function renderResult(result) {
-    if (!result) {
-        return `<span class="badge bg-secondary">-</span>`;
+/* =====================
+ * DB 결과 코드 → 화면 표시 텍스트 변환
+ * (WIN/DRAW/LOSE → 승/무/패)
+ * ===================== */
+function renderResult(result, matchType, ourScore, opponentScore) {
+
+    if (matchType === 'INTERNAL') {
+        return `<span class="badge bg-info">자체전</span>`;
     }
 
     const map = {
@@ -124,7 +128,48 @@ function renderResult(result) {
         LOSE: `<span class="badge bg-danger">패</span>`
     };
 
-    return map[result] ?? `<span class="badge bg-secondary">-</span>`;
+    const resultText = map[result] ?? `<span class="badge bg-secondary">-</span>`;
+
+    if (ourScore == null || opponentScore == null) {
+        return resultText;
+    }
+
+    if (ourScore === 0 && opponentScore === 0) {
+        return resultText;
+    }
+
+    return `${resultText} (${ourScore} : ${opponentScore})`;
+}
+
+/* =====================
+ * DB 결과 코드 → 화면 표시 텍스트 변환
+ * (SCHEDULED/DONE/CANCELED/POSTPONE → 예정/종료/취소/연기)
+ * ===================== */
+function renderStatus(status) {
+    if (!status) {
+        return `-`;
+    }
+
+    const map = {
+        SCHEDULED:  `예정`,
+        DONE:  `종료`,
+        CANCELED:  `취소`,
+        POSTPONE:  `연기`
+
+    };
+
+    return map[status] ?? `-`;
+}
+
+/* =====================
+ * 상대팀 이름
+ * (INTERNAL → 자체전)
+ * ===================== */
+function renderOpponentName(name, matchType) {
+    if (matchType === 'INTERNAL') {
+        return '자체전';
+    }
+    return name ?? '-';
 }
 
 function goToMatchDetail(matchId) {

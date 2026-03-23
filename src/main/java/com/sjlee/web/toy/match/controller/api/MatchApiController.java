@@ -1,5 +1,7 @@
 package com.sjlee.web.toy.match.controller.api;
 
+import com.sjlee.web.toy.attendance.dto.AttendanceList;
+import com.sjlee.web.toy.attendance.service.AttendanceService;
 import com.sjlee.web.toy.common.response.ApiResponse;
 import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.dto.MatchDetail;
@@ -16,6 +18,7 @@ import java.util.List;
 public class MatchApiController {
 
     private final MatchService matchService;
+    private final AttendanceService attendanceService;
 
     /**
      * 경기 목록 조회
@@ -40,6 +43,15 @@ public class MatchApiController {
     @GetMapping("/{matchId}")
     public ApiResponse<MatchDetail> matchDetail(@PathVariable Long matchId) {
         return ApiResponse.success(matchService.getMatchDetail(matchId));
+    }
+
+    @GetMapping("/matches/{matchId}/attendance")
+    public ApiResponse<List<AttendanceList>> getAttendanceList(
+            @PathVariable Long matchId) {
+
+        return ApiResponse.success(
+                attendanceService.getAttendanceList(matchId)
+        );
     }
 
 }

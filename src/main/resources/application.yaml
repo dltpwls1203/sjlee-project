@@ -6,6 +6,9 @@ spring:
     name: sjlee-project
   thymeleaf:
     cache: false
+  devtools:
+    restart:
+      additional-exclude: static/**, templates/**
 
   datasource:
     url: jdbc:postgresql://localhost:5432/sjlee_db

@@ -32,8 +32,6 @@ async function loadMatchDetail() {
             return;
         }
 
-        console.log(JSON.stringify(result));
-
         bindDetail(result.data);
 
     } catch (e) {
@@ -210,13 +208,6 @@ function validateForm() {
     return true;
 }
 
-/* =====================
- * Attendance
- * ===================== */
-
-function openAttendancePopup() {
-    alert("출석 인원 팝업 (추후 구현)");
-}
 
 /* =====================
  * Utils
@@ -231,4 +222,59 @@ function setValue(id, value) {
     if (el && value !== undefined && value !== null) {
         el.value = value;
     }
+}
+
+/* =====================
+ * Attendance
+ * ===================== */
+function openAttendancePopup() {
+
+    const modal = new bootstrap.Modal(
+        document.getElementById('attendanceModal')
+    );
+
+    modal.show();
+
+    loadAttendance();
+}
+
+async function loadAttendance() {
+
+    try {
+        const response = await fetch(`/api/matches/${matchId}/attendance`);
+        const result = await response.json();
+
+        if (!result.success) {
+            alert("출석 정보를 불러오지 못했습니다.");
+            return;
+        }
+
+        renderAttendanceList(result.data);
+
+    } catch (e) {
+        console.error(e);
+        alert("출석 조회 중 오류 발생");
+    }
+}
+
+function renderAttendanceList(list) {
+
+    const tbody = document.getElementById("attendanceTableBody");
+
+    if (!list || list.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="3" class="text-center">출석 인원이 없습니다.</td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = list.map((item, index) => `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${item.memberName}</td>
+            <td>${renderAttendStatus(item.attendStatus)}</td>
+        </tr>
+    `).join("");
 }

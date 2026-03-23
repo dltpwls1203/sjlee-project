@@ -4,6 +4,7 @@ import com.sjlee.web.toy.dashboard.admin.controller.AdminDashboardController;
 import com.sjlee.web.toy.match.controller.MatchAdminController;
 import com.sjlee.web.toy.member.domain.AdminMenu;
 import com.sjlee.web.toy.member.domain.Member;
+import com.sjlee.web.toy.player.controller.PlayerAdminController;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.ui.Model;
@@ -15,7 +16,8 @@ import java.util.List;
 
 @ControllerAdvice(assignableTypes = {
         AdminDashboardController.class,
-        MatchAdminController.class
+        MatchAdminController.class,
+        PlayerAdminController.class
         // 나중에 AdminMemberController.class 등 추가
 })
 public class AdminMenuAdvice {

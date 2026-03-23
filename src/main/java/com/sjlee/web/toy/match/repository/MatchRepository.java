@@ -22,7 +22,8 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             m.opponentScore,
             m.result,
             m.status,
-            count(a.id)
+            count(a.id),
+            m.matchType
         )
         from Match m
         left join Attendance a

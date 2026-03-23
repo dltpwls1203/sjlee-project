@@ -6,7 +6,8 @@ import lombok.Getter;
 public enum AdminMenu {
 
     DASHBOARD("대시보드", "/admin", Permission.ADMIN_DASHBOARD),
-    MATCH("경기 관리", "/admin/matches", Permission.ADMIN_MATCH);
+    MATCH("경기 관리", "/admin/matches", Permission.ADMIN_MATCH),
+    PLAYER("선수 관리", "/admin/player", Permission.ADMIN_PLAYER);
 
     private final String title;
     private final String url;

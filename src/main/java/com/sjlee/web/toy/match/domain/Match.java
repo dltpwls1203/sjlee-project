@@ -48,6 +48,10 @@ public class Match {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "match_type", nullable = false, length = 20)
+    private MatchType matchType;
+
 
     // ===== 생성 시 기본값 세팅 =====
     @PrePersist

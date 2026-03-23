@@ -2,6 +2,7 @@ package com.sjlee.web.toy.match.dto;
 
 import com.sjlee.web.toy.match.domain.MatchResult;
 import com.sjlee.web.toy.match.domain.MatchStatus;
+import com.sjlee.web.toy.match.domain.MatchType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -19,6 +20,7 @@ public class MatchList {
     private final Integer opponentScore;    // 상대팀 점수
     private final MatchResult result;       // 경기 결과
     private final MatchStatus status;       // 경기 상태 (SCHEDULED / DONE / CANCELED / POSTPONE)
-    private final Long attendanceCount;         // 출석 인원 수 (ATTEND + LATE)
+    private final Long attendanceCount;     // 출석 인원 수 (ATTEND + LATE)
+    private final MatchType matchType;      // 매치 상태 (EXTERNAL / INTERNAL)
 
 }
