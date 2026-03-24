@@ -3,6 +3,7 @@ package com.sjlee.web.toy.match.service.impl;
 import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.domain.MatchResult;
 import com.sjlee.web.toy.match.domain.MatchStatus;
+import com.sjlee.web.toy.match.domain.MatchType;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.repository.MatchRepository;
 import com.sjlee.web.toy.match.service.MatchService;
@@ -43,7 +44,8 @@ class MatchServiceImplTest {
                         0,
                         MatchResult.WIN,
                         MatchStatus.DONE,
-                        10L
+                        10L,
+                        MatchType.EXTERNAL
                 )
         );
 

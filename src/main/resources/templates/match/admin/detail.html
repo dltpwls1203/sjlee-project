@@ -151,10 +151,34 @@
       </div>
 
       <div class="modal-body">
+        <!-- 🔥 액션 버튼 -->
+        <div class="mb-2 d-flex justify-content-between">
+          <div>
+            <button type="button"
+                    class="btn btn-success btn-sm"
+                    onclick="updateAttendance('ATTEND')">
+              참석
+            </button>
+
+            <button type="button"
+                    class="btn btn-danger btn-sm"
+                    onclick="updateAttendance('ABSENT')">
+              불참
+            </button>
+          </div>
+
+          <div>
+            <span class="text-muted">선택한 선수 일괄 변경</span>
+          </div>
+        </div>
+
+        <!-- 테이블 -->
         <table class="table table-bordered table-sm">
           <thead>
           <tr>
-            <th>#</th>
+            <th>
+              <input type="checkbox" id="checkAll">
+            </th>
             <th>이름</th>
             <th>상태</th>
           </tr>

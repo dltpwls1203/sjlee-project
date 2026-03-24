@@ -272,9 +272,76 @@ function renderAttendanceList(list) {
 
     tbody.innerHTML = list.map((item, index) => `
         <tr>
-            <td>${index + 1}</td>
-            <td>${item.memberName}</td>
+            <td>
+                <input type="checkbox"
+                       class="attendance-checkbox"
+                       value="${item.playerId}">
+            </td>
+            <td>${renderPlayerName(item.playerName, item.attendStatus)}</td>
             <td>${renderAttendStatus(item.attendStatus)}</td>
         </tr>
     `).join("");
 }
+
+function renderAttendStatus(status) {
+
+    const map = {
+        ATTEND: "참석",
+        LATE: "지각",
+        ABSENT: "불참"
+    };
+
+    return map[status] ?? "불참";
+}
+
+function renderPlayerName(name, status) {
+
+    if (status === "ATTEND") {
+        return `<span style="color:#007bff; font-weight:bold;">${name}</span>`;
+    }
+
+    return name;
+}
+
+function getSelectedPlayerIds() {
+    const checked = document.querySelectorAll('.attendance-checkbox:checked');
+
+    return Array.from(checked).map(cb => Number(cb.value));
+}
+
+async function updateAttendance(status) {
+
+    const playerIds = getSelectedPlayerIds();
+
+    if (playerIds.length === 0) {
+        alert("선수를 선택하세요.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/matches/${matchId}/attendance`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                playerIds: playerIds,
+                attendStatus: status
+            })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            alert(result.error.message);
+            return;
+        }
+
+        alert("출석 상태가 변경되었습니다.");
+
+        loadAttendance(); // 다시 조회
+
+    } catch (e) {
+        console.error(e);
+        alert("출석 변경 중 오류 발생");
+    }
+}
+

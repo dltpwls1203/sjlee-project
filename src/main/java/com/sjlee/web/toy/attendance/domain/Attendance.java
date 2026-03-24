@@ -21,8 +21,9 @@ public class Attendance {
     @Column(name = "player_id", nullable = false)
     private Long playerId;   // 선수 아이디 (논리 FK)
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "attend_status", nullable = false, length = 20)
-    private String attendStatus; // ATTEND / LATE / ABSENT / UNKNOWN
+    private AttendStatus attendStatus; // ATTEND / LATE / ABSENT / UNKNOWN
 
     @Column(length = 200)
     private String note;     // 비고
@@ -34,14 +35,24 @@ public class Attendance {
     private LocalDateTime updatedAt;
 
     // ===== 생성 시 기본값 세팅 =====
+
+    public Attendance(Long matchId, Long playerId) {
+        this.matchId = matchId;
+        this.playerId = playerId;
+    }
+
     @PrePersist
     private void prePersist() {
         this.createdAt = LocalDateTime.now();
-        this.attendStatus = (this.attendStatus == null) ? "UNKNOWN" : this.attendStatus;
+        this.attendStatus = (this.attendStatus == null) ? AttendStatus.UNKNOWN : this.attendStatus;
     }
 
     @PreUpdate
     private void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public void changeAttendStatus(AttendStatus attendStatus) {
+        this.attendStatus = attendStatus;
     }
 }

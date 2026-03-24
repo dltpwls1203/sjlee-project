@@ -1,14 +1,14 @@
 package com.sjlee.web.toy.attendance.dto;
 
 import com.sjlee.web.toy.attendance.domain.AttendStatus;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Getter
-@AllArgsConstructor
-public class AttendanceList {
-    private Long playerId;
-    private String playerName;
+@NoArgsConstructor
+public class AttendanceStatusUpdateRequest {
+    private List<Long> playerIds;
     private AttendStatus attendStatus;
-    private Long matchId;
 }

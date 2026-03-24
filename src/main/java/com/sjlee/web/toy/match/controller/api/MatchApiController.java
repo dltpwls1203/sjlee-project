@@ -1,6 +1,7 @@
 package com.sjlee.web.toy.match.controller.api;
 
 import com.sjlee.web.toy.attendance.dto.AttendanceList;
+import com.sjlee.web.toy.attendance.dto.AttendanceStatusUpdateRequest;
 import com.sjlee.web.toy.attendance.service.AttendanceService;
 import com.sjlee.web.toy.common.response.ApiResponse;
 import com.sjlee.web.toy.match.domain.Match;
@@ -45,7 +46,7 @@ public class MatchApiController {
         return ApiResponse.success(matchService.getMatchDetail(matchId));
     }
 
-    @GetMapping("/matches/{matchId}/attendance")
+    @GetMapping("/{matchId}/attendance")
     public ApiResponse<List<AttendanceList>> getAttendanceList(
             @PathVariable Long matchId) {
 
@@ -53,5 +54,19 @@ public class MatchApiController {
                 attendanceService.getAttendanceList(matchId)
         );
     }
+
+    /**
+     * 경기별 출석 상태 일괄 변경
+     */
+    @PutMapping("/{matchId}/attendance")
+    public ApiResponse<Void> updateAttendanceStatus(
+            @PathVariable Long matchId,
+            @RequestBody AttendanceStatusUpdateRequest request
+    ) {
+        attendanceService.updateAttendanceStatus(matchId, request);
+        return ApiResponse.success(null);
+    }
+
+
 
 }
