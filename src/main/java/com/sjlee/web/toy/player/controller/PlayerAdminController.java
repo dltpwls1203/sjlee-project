@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping("/admin/player")
+@RequestMapping("/admin/players")
 public class PlayerAdminController {
 
     /**
@@ -16,5 +16,13 @@ public class PlayerAdminController {
     @GetMapping
     public String playerList() {
         return "player/admin/list";
+    }
+
+    /**
+     * 관리자 선수 등록 화면
+     */
+    @GetMapping("/new")
+    public String createPlayerForm() {
+        return "player/admin/form";
     }
 }

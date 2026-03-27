@@ -40,7 +40,7 @@ public class Match {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "result", length = 10)
-    private MatchResult result; // 상대팀 점수
+    private MatchResult result; // 경기 결과
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
@@ -65,5 +65,27 @@ public class Match {
     @PreUpdate
     private void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    /* =====================
+     * 경기 결과 조회
+     * ===================== */
+    public void calculateResult() {
+        if (this.status != MatchStatus.DONE) {
+            this.result = null;
+            return;
+        }
+
+        if (this.ourScore == null || this.opponentScore == null) {
+            throw new IllegalArgumentException("완료된 경기는 점수가 필요합니다.");
+        }
+
+        if (this.ourScore > this.opponentScore) {
+            this.result = MatchResult.WIN;
+        } else if (this.ourScore < this.opponentScore) {
+            this.result = MatchResult.LOSE;
+        } else {
+            this.result = MatchResult.DRAW;
+        }
     }
 }

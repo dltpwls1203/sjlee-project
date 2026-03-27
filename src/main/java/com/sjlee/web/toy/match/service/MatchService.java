@@ -1,6 +1,8 @@
 package com.sjlee.web.toy.match.service;
 
 import com.sjlee.web.toy.match.domain.Match;
+import com.sjlee.web.toy.match.domain.MatchResult;
+import com.sjlee.web.toy.match.domain.MatchStatus;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.repository.MatchRepository;
@@ -23,11 +25,13 @@ public class MatchService {
     public List<MatchList> getMatchList() {
         return matchRepository.findMatchList();
     }
+
     /**
      * 경기 등록
      */
     @Transactional
     public Long createMatch(Match match) {
+        match.calculateResult();
         return matchRepository.save(match).getId();
     }
 

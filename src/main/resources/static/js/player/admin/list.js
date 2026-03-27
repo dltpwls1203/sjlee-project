@@ -74,7 +74,7 @@ function createPlayerRow(player, index) {
         <tr>
             <td>${index + 1}</td>
             <td>${player.name}</td>
-            <td>${player.age ?? "-"}</td>
+            <td>${getKoreanAge(player.birthDate)}</td>
             <td>${player.position ?? "-"}</td>
             <td>${player.backNumber ?? "-"}</td>
             <td>${player.attendCount ?? 0}</td>
@@ -97,4 +97,14 @@ function searchPlayers() {
 
 function showError(message) {
     alert(message); // 추후 공통 error UI로 교체 가능
+}
+
+function getKoreanAge(birthDate) {
+    if(!birthDate) return "-";
+
+    const baseYear = new Date().getFullYear();
+    const birthYear = Number(birthDate.split("-")[0]);
+    const age = baseYear - birthYear + 1;
+
+    return `${age}세`;
 }
