@@ -1,5 +1,6 @@
 package com.sjlee.web.toy.ground.service;
 
+import com.sjlee.web.toy.ground.dto.GroundList;
 import com.sjlee.web.toy.ground.dto.GroundSelect;
 import com.sjlee.web.toy.ground.repository.GroundRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,5 +18,8 @@ public class GroundService {
      */
     public List<GroundSelect> getGroundSelectItems() {
         return groundRepository.findSelectItems();
+    }
+
+    public List<GroundList> getGroundList() { return groundRepository.findGroundList();
     }
 }

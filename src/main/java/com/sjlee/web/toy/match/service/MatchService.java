@@ -31,6 +31,7 @@ public class MatchService {
      */
     @Transactional
     public Long createMatch(Match match) {
+        // 경기 점수에 따른 result 값 설정
         match.calculateResult();
         return matchRepository.save(match).getId();
     }

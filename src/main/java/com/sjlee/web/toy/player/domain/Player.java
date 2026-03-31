@@ -1,5 +1,6 @@
 package com.sjlee.web.toy.player.domain;
 
+import com.sjlee.web.toy.match.domain.MatchStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -45,13 +46,21 @@ public class Player {
     @Column(name = "join_at")
     private LocalDate joinAt;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    @Column(name = "use_yn")
+    @Column(name = "use_yn", nullable = false)
     private String useYn;
 
+    // ===== 생성 시 기본값 세팅 =====
+    @PrePersist
+    private void prePersist() {
+        this.createdAt = LocalDateTime.now();
+        this.status = (this.status == null) ? PlayerStatus.ACTIVE : this.status;
+        this.playerType = (this.playerType == null) ? PlayerType.REGULAR : this.playerType;
+        this.useYn = (this.useYn == null) ? "Y" : this.useYn;
+    }
 }

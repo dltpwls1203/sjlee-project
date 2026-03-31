@@ -6,13 +6,15 @@ public enum MemberRole {
     SUPER_ADMIN(Set.of(
             Permission.ADMIN_DASHBOARD,
             Permission.ADMIN_MATCH,
-            Permission.ADMIN_PLAYER
+            Permission.ADMIN_PLAYER,
+            Permission.ADMIN_GROUND
     )),
 
     ADMIN(Set.of(
             Permission.ADMIN_DASHBOARD,
             Permission.ADMIN_MATCH,
-            Permission.ADMIN_PLAYER
+            Permission.ADMIN_PLAYER,
+            Permission.ADMIN_GROUND
     )),
 
     USER(Set.of()); // 관리자 메뉴 없음

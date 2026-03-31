@@ -1,81 +1,14 @@
-document.addEventListener("DOMContentLoaded", initMatchForm);
+document.addEventListener("DOMContentLoaded", initPlayerForm);
 
-function initMatchForm() {
-    loadGrounds();
-    loadOpponentTeams();
-    loadMatchTypes();
-
-    document.getElementById("status")
-        .addEventListener("change", handleStatusChange);
+function initPlayerForm() {
 
     document.getElementById("btnSave")
-        .addEventListener("click", submitMatch);
+        .addEventListener("click", submitPlayer);
 }
 
 /* =====================
- * 구장 정보 가져오기
+ * 보류 나중에 선택 옵션을 위해 남겨둠
  * ===================== */
-async function loadGrounds() {
-    try {
-        const response = await fetch("/api/grounds");
-        const result = await response.json();
-
-        if (!result.success) {
-            alert("구장 정보를 불러오지 못했습니다.");
-            return;
-        }
-
-        const select = document.getElementById("groundId");
-        result.data.forEach(ground => {
-            select.appendChild(createOption(ground.id, ground.name));
-        });
-
-    } catch (e) {
-        console.error(e);
-        alert("구장 조회 중 오류가 발생했습니다.");
-    }
-}
-
-/* =====================
- * 상대팀 정보 가져오기
- * ===================== */
-async function loadOpponentTeams() {
-    try {
-        const response = await fetch("/api/opponent-teams");
-        const result = await response.json();
-
-        if (!result.success) {
-            alert("상대 팀 정보를 불러오지 못했습니다.");
-            return;
-        }
-
-        const select = document.getElementById("opponentTeamId");
-        result.data.forEach(team => {
-            select.appendChild(createOption(team.id, team.name));
-        });
-
-    } catch (e) {
-        console.error(e);
-        alert("상대 팀 조회 중 오류가 발생했습니다.");
-    }
-}
-
-/* =====================
- * 경기 유형 정보 세팅
- * ===================== */
-function loadMatchTypes() {
-    const matchTypes = [
-        { code: "EXTERNAL", name: "시합" },
-        { code: "INTERNAL", name: "자체전" }
-    ];
-
-    const select = document.getElementById("matchType");
-
-    matchTypes.forEach(type => {
-        select.appendChild(createOption(type.code, type.name));
-    });
-}
-
 function createOption(value, text) {
     const option = document.createElement("option");
     option.value = value;
@@ -83,48 +16,25 @@ function createOption(value, text) {
     return option;
 }
 
-/* =====================
- * Status Rule Handling
- * ===================== */
-
-function handleStatusChange() {
-    const status = getValue("status");
-
-    const ourScore = document.getElementById("ourScore");
-    const opponentScore = document.getElementById("opponentScore");
-
-    if (status === "DONE") {
-        ourScore.disabled = false;
-        opponentScore.disabled = false;
-    } else {
-        // SCHEDULED / CANCELED / POSTPONED
-        ourScore.value = 0;
-        opponentScore.value = 0;
-        ourScore.disabled = true;
-        opponentScore.disabled = true;
-    }
-}
 
 /* =====================
- * Submit
+ * 등록
  * ===================== */
-
-async function submitMatch() {
+async function submitPlayer() {
     if (!validateForm()) return;
 
     const body = {
         teamId: Number(document.getElementById("teamId").value),
-        matchAt: getValue("matchAt"),
-        groundId: getValue("groundId") || null,
-        opponentTeamId: getValue("opponentTeamId") || null,
-        status: getValue("status"),
-        ourScore: Number(getValue("ourScore") || 0),
-        opponentScore: Number(getValue("opponentScore") || 0),
-        matchType: getValue("matchType")
+        name: getValue("name"),
+        position: getValue("position"),
+        birthDate: getValue("birthDate") || null,
+        backNumber: Number(getValue("backNumber") || 0),
+        status: getValue("status") || "ACTIVE",
+        playerType: getValue("playerType") || "REGULAR"
     };
 
     try {
-        const response = await fetch("/api/matches", {
+        const response = await fetch("/api/players", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)
@@ -137,8 +47,8 @@ async function submitMatch() {
             return;
         }
 
-        alert("경기가 등록되었습니다.");
-        location.href = "/admin/matches";
+        alert("선수가 등록되었습니다.");
+        location.href = "/admin/players";
 
     } catch (e) {
         console.error(e);
@@ -149,33 +59,18 @@ async function submitMatch() {
 /* =====================
  * Validation
  * ===================== */
-
 function validateForm() {
-    const matchAt = getValue("matchAt");
-    const status = getValue("status");
-    const ourScore = getValue("ourScore");
-    const opponentScore = getValue("opponentScore");
+    const name = getValue("name");
+    const position = getValue("position");
 
-    if (!matchAt) {
-        alert("경기 일시는 필수입니다.");
+    if (!name) {
+        alert("선수 이름은 필수입니다.");
         return false;
     }
 
-    if (!status) {
-        alert("경기 상태를 선택하세요.");
+    if (!position) {
+        alert("포지션을 선택해주세요.");
         return false;
-    }
-
-    if (status === "DONE") {
-        if (ourScore === "" || opponentScore === "") {
-            alert("완료된 경기는 점수를 입력해야 합니다.");
-            return false;
-        }
-
-        if (ourScore < 0 || opponentScore < 0) {
-            alert("점수는 0 이상의 정수만 입력 가능합니다.");
-            return false;
-        }
     }
 
     return true;
@@ -184,7 +79,6 @@ function validateForm() {
 /* =====================
  * Utils
  * ===================== */
-
 function getValue(id) {
     return document.getElementById(id)?.value;
 }

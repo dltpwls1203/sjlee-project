@@ -24,13 +24,31 @@
 
           <form id="playerForm">
 
+            <!-- 팀 (고정) -->
+            <div class="form-group">
+              <label>우리 팀</label>
+              <select class="form-control" disabled>
+                <option>카리스FC</option>
+              </select>
+              <input type="hidden" id="teamId" value="1">
+            </div>
+
             <!-- 선수 이름 -->
             <div class="form-group">
               <label>선수 이름</label>
               <input type="text"
-                     id="playerName"
+                     id="name"
                      class="form-control"
                      placeholder="선수 이름 입력">
+            </div>
+
+            <!-- 생년월일 -->
+            <div class="form-group">
+              <label>생년월일</label>
+              <input type="text"
+                     id="birthDate"
+                     class="form-control"
+                     placeholder="ex) 1991-12-13">
             </div>
 
 
@@ -39,14 +57,26 @@
               <label>포지션</label>
               <select id="position" class="form-control">
                 <option value="">선택 안 함</option>
+                <option value="FW">FW</option>
+                <option value="MF">MF</option>
+                <option value="DF">DF</option>
               </select>
+            </div>
+
+            <!-- 등번호 -->
+            <div class="form-group">
+              <label>등번호</label>
+              <input type="number"
+                     id="backNumber"
+                     class="form-control"
+                     min="0">
             </div>
 
             <div class="text-right mt-4">
               <button type="button" id="btnSave" class="btn btn-primary">
                 저장
               </button>
-              <a href="/admin/matches" class="btn btn-secondary">
+              <a href="/admin/players" class="btn btn-secondary">
                 취소
               </a>
             </div>
@@ -60,6 +90,6 @@
   </div>
 </div>
 
-<script src="/js/match/admin/form.js"></script>
+<script src="/js/player/admin/form.js"></script>
 </body>
 </html>

@@ -26,7 +26,8 @@ public class MatchApiController {
      */
     @GetMapping
     public ApiResponse<List<MatchList>> getMatchList() {
-        return ApiResponse.success(matchService.getMatchList());
+        List<MatchList> matches = matchService.getMatchList();
+        return ApiResponse.success(matches);
     }
 
     /**

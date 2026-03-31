@@ -17,7 +17,7 @@ function initMatchForm() {
  * ===================== */
 async function loadGrounds() {
     try {
-        const response = await fetch("/api/grounds");
+        const response = await fetch("/api/grounds/select");
         const result = await response.json();
 
         if (!result.success) {
@@ -84,9 +84,8 @@ function createOption(value, text) {
 }
 
 /* =====================
- * Status Rule Handling
+ * 상태에 따른 점수 입력 제어
  * ===================== */
-
 function handleStatusChange() {
     const status = getValue("status");
 
@@ -106,7 +105,7 @@ function handleStatusChange() {
 }
 
 /* =====================
- * Submit
+ * 등록
  * ===================== */
 
 async function submitMatch() {

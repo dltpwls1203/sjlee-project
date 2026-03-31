@@ -1,5 +1,7 @@
 package com.sjlee.web.toy.player.service;
 
+import com.sjlee.web.toy.match.domain.Match;
+import com.sjlee.web.toy.player.domain.Player;
 import com.sjlee.web.toy.player.dto.PlayerList;
 import com.sjlee.web.toy.player.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,14 @@ public class PlayerService {
 
     public List<PlayerList> getPlayerList() {
         return playerRepository.findPlayerList();
+    }
+
+    /**
+     * 경기 등록
+     */
+    @Transactional
+    public Long createPlayer(Player player) {
+        return playerRepository.save(player).getId();
     }
 
 }
