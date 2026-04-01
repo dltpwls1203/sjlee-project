@@ -25,7 +25,7 @@ public class Ground {
     @Column(name = "field_width")
     private Integer fieldWidth;     // 경기장 너비 (m)
 
-    @Column(name = "field_height")
+    @Column(name = "field_length")
     private Integer fieldLength;    // 경기장 길이 (m)
 
     @Column(name = "players_per_team")

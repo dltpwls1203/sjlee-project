@@ -17,6 +17,8 @@ async function loadGroundList() {
             return;
         }
 
+        console.log(result.data);
+
         renderGroundList(result.data);
 
     } catch (err) {
@@ -60,7 +62,7 @@ function renderGroundList(grounds) {
     }
 
     tbody.innerHTML = grounds
-        .map((match, index) => createGroundRow(ground, index))
+        .map((ground, index) => createGroundRow(ground, index))
         .join("");
 }
 
@@ -68,20 +70,26 @@ function createGroundRow(ground, index) {
     return `
         <tr>
             <td>${index + 1}</td> <!-- 화면용 번호 -->
-            <td>${formatDateWithDay(match.matchAt)}</td>
-            <td>${match.groundName} (${match.playersPerTeam} vs ${match.playersPerTeam})</td>
-            <td>${renderOpponentName(match.opponentTeamName, match.matchType)}</td>
-            <td>${renderResult(match.result, match.matchType, match.ourScore, match.opponentScore)}</td>
-            <td>${renderStatus(match.status)}</td>
-            <td>${match.attendanceCount}</td>
-            <td class="text-center">
-                <button type="button"
-                        class="btn btn-sm btn-outline-primary"
-                        title="상세보기"
-                        onclick="goToMatchDetail(${match.matchId})">
-                    <i class="fas fa-search">상세</i>
-                </button>
-            </td>
+            <td>${ground.name}</td>
+            <td>${ground.location}</td>
+            <td>${formatFieldSize(ground.fieldWidth, ground.fieldLength)}</td>
+            <td>${formatPlayers(ground.playerPerTeam)}</td>
+            <td>${formatRentalFee(ground.rentalFee)}</td>
         </tr>
     `;
+}
+
+function formatPlayers(count) {
+    if (!count) return "-";
+    return `${count} vs ${count}`;
+}
+
+function formatFieldSize(width, length) {
+    if (!width || !length) return "-";
+    return `${width}m × ${length}m`;
+}
+
+function formatRentalFee(rentalFee) {
+    if (rentalFee == null) return "-";
+    return rentalFee.toLocaleString() + "원";
 }

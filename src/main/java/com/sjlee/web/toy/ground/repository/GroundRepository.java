@@ -15,6 +15,7 @@ public interface GroundRepository extends JpaRepository<Ground, Long> {
         select new com.sjlee.web.toy.ground.dto.GroundList(
             g.id,
             g.name,
+            g.location,
             g.fieldWidth,
             g.fieldLength,
             g.playersPerTeam,
