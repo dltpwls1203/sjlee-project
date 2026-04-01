@@ -8,16 +8,17 @@ function initMatchList() {
  * Main
  * ===================== */
 
-async function loadMatchList() {
+async function loadMatchList(keyword = "") {
     try {
-        const result = await fetchMatchList();
+        const result = await fetchMatchList(keyword);
 
         if (!result.success) {
             showError(result.error?.message || "경기 목록을 불러오지 못했습니다.");
             return;
         }
 
-        renderMatchList(result.data);
+        renderMatchList(result.data.content, result.data.page, result.data.size);
+        renderPagination(result.data, "loadMatchList", keyword);
 
     } catch (err) {
         console.error(err);
@@ -28,9 +29,16 @@ async function loadMatchList() {
 /* =====================
  * 매치 목록 API
  * ===================== */
+async function fetchMatchList(page = 0, keyword = "") {
+    const params = new URLSearchParams();
+    params.append("page", page);
+    params.append("size", 10);
 
-async function fetchMatchList() {
-    const response = await fetch("/api/matches", {
+    if (keyword) {
+        params.append("keyword", keyword);
+    }
+
+    const response = await fetch(`/api/matches?${params.toString()}`, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -45,8 +53,7 @@ async function fetchMatchList() {
 /* =====================
  * Render
  * ===================== */
-
-function renderMatchList(matches) {
+function renderMatchList(matches, page, size) {
     const tbody = document.getElementById("matchTableBody");
 
     if (!tbody) return;
@@ -61,14 +68,16 @@ function renderMatchList(matches) {
     }
 
     tbody.innerHTML = matches
-        .map((match, index) => createMatchRow(match, index))
+        .map((match, index) => createMatchRow(match, index, page, size))
         .join("");
 }
 
-function createMatchRow(match, index) {
+function createMatchRow(match, index, page, size) {
+    const rowNumber = page * size + index + 1;
+
     return `
         <tr>
-            <td>${index + 1}</td> <!-- 화면용 번호 -->
+            <td>${rowNumber}</td>
             <td>${formatDateWithDay(match.matchAt)}</td>
             <td>${match.groundName} (${match.playersPerTeam} vs ${match.playersPerTeam})</td>
             <td>${renderOpponentName(match.opponentTeamName, match.matchType)}</td>

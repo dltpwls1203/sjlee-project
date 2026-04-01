@@ -29,7 +29,6 @@ async function loadPlayerList(keyword = "") {
 /* =====================
  * 선수 목록 API
  * ===================== */
-
 async function fetchPlayerList(page = 0, keyword = "") {
     const params = new URLSearchParams();
     params.append("page", page);

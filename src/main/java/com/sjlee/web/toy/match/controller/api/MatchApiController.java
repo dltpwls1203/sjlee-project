@@ -4,11 +4,15 @@ import com.sjlee.web.toy.attendance.dto.AttendanceList;
 import com.sjlee.web.toy.attendance.dto.AttendanceStatusUpdateRequest;
 import com.sjlee.web.toy.attendance.service.AttendanceService;
 import com.sjlee.web.toy.common.response.ApiResponse;
+import com.sjlee.web.toy.common.response.PageResponse;
 import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.service.MatchService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,9 +29,9 @@ public class MatchApiController {
      * 경기 목록 조회
      */
     @GetMapping
-    public ApiResponse<List<MatchList>> getMatchList() {
-        List<MatchList> matches = matchService.getMatchList();
-        return ApiResponse.success(matches);
+    public ApiResponse<PageResponse<MatchList>> getMatchList(@PageableDefault(size = 10, page = 0) Pageable pageable) {
+        Page<MatchList> matches = matchService.getMatchList(pageable);
+        return ApiResponse.success(new PageResponse<>(matches));
     }
 
     /**

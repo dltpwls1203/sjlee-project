@@ -3,6 +3,8 @@ package com.sjlee.web.toy.match.repository;
 import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,7 +13,8 @@ import java.util.List;
 
 public interface MatchRepository extends JpaRepository<Match, Long> {
 
-    @Query("""
+    @Query(
+            value = """
         select new com.sjlee.web.toy.match.dto.MatchList(
             m.id,
             m.matchAt,
@@ -44,8 +47,12 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             m.result,
             m.status
         order by m.matchAt desc
+    """,
+            countQuery = """
+        select count(p)
+        from Player p
     """)
-    List<MatchList> findMatchList();
+    Page<MatchList> findMatchList(Pageable pageable);
 
     @Query("""
         select new com.sjlee.web.toy.match.dto.MatchDetail(

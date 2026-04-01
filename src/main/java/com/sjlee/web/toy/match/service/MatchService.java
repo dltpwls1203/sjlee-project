@@ -7,6 +7,8 @@ import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.repository.MatchRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,8 +24,8 @@ public class MatchService {
     /**
      * 경기 목록 조회
      */
-    public List<MatchList> getMatchList() {
-        return matchRepository.findMatchList();
+    public Page<MatchList> getMatchList(Pageable pageable) {
+        return matchRepository.findMatchList(pageable);
     }
 
     /**
