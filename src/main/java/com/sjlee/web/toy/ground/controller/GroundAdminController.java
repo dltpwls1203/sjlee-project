@@ -15,4 +15,12 @@ public class GroundAdminController {
     public String groundList() {
         return "ground/admin/list";
     }
+
+    /**
+     * 관리자 구장 등록 화면
+     */
+    @GetMapping("/new")
+    public String createGroundForm() {
+        return "ground/admin/form";
+    }
 }

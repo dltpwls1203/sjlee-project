@@ -40,13 +40,16 @@ public class Ground {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt; // 수정일
 
+    @Column(name = "use_yn")
+    private String useYn; // 수정일
+
     /* =====================
      * Lifecycle Callbacks
      * ===================== */
-
     @PrePersist
     private void prePersist() {
         this.createdAt = LocalDateTime.now();
+        this.useYn = (this.useYn == null) ? "Y" : this.useYn;
     }
 
     @PreUpdate

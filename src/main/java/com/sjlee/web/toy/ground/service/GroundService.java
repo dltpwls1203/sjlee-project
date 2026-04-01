@@ -1,5 +1,6 @@
 package com.sjlee.web.toy.ground.service;
 
+import com.sjlee.web.toy.ground.domain.Ground;
 import com.sjlee.web.toy.ground.dto.GroundList;
 import com.sjlee.web.toy.ground.dto.GroundSelect;
 import com.sjlee.web.toy.ground.repository.GroundRepository;
@@ -21,5 +22,9 @@ public class GroundService {
     }
 
     public List<GroundList> getGroundList() { return groundRepository.findGroundList();
+    }
+
+    public Long createGround(Ground ground) {
+        return groundRepository.save(ground).getId();
     }
 }

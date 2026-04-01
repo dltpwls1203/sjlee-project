@@ -13,7 +13,7 @@ async function loadGroundList() {
         const result = await fetchGroundList();
 
         if (!result.success) {
-            showError(result.error?.message || "경기 목록을 불러오지 못했습니다.");
+            showError(result.error?.message || "구장 목록을 불러오지 못했습니다.");
             return;
         }
 
