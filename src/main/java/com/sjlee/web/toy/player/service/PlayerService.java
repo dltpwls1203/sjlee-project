@@ -1,10 +1,11 @@
 package com.sjlee.web.toy.player.service;
 
-import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.player.domain.Player;
 import com.sjlee.web.toy.player.dto.PlayerList;
 import com.sjlee.web.toy.player.repository.PlayerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,8 +18,8 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
 
-    public List<PlayerList> getPlayerList() {
-        return playerRepository.findPlayerList();
+    public Page<PlayerList> getPlayerList(Pageable pageable) {
+        return playerRepository.findPlayerList(pageable);
     }
 
     /**

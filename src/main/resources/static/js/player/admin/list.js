@@ -17,7 +17,8 @@ async function loadPlayerList(keyword = "") {
             return;
         }
 
-        renderPlayerList(result.data);
+        renderPlayerList(result.data.content, result.data.page, result.data.size);
+        renderPagination(result.data, "loadPlayerList", keyword);
 
     } catch (err) {
         console.error(err);
@@ -29,12 +30,16 @@ async function loadPlayerList(keyword = "") {
  * 선수 목록 API
  * ===================== */
 
-async function fetchPlayerList(keyword) {
-    const url = keyword
-        ? `/api/players?keyword=${encodeURIComponent(keyword)}`
-        : `/api/players`;
+async function fetchPlayerList(page = 0, keyword = "") {
+    const params = new URLSearchParams();
+    params.append("page", page);
+    params.append("size", 10);
 
-    const response = await fetch(url, {
+    if (keyword) {
+        params.append("keyword", keyword);
+    }
+
+    const response = await fetch(`/api/players?${params.toString()}`, {
         method: "GET",
         headers: { "Accept": "application/json" }
     });
@@ -49,8 +54,7 @@ async function fetchPlayerList(keyword) {
 /* =====================
  * Render
  * ===================== */
-
-function renderPlayerList(players) {
+function renderPlayerList(players, page, size) {
     const tbody = document.getElementById("playerTableBody");
 
     if (!tbody) return;
@@ -65,14 +69,17 @@ function renderPlayerList(players) {
     }
 
     tbody.innerHTML = players
-        .map((player, index) => createPlayerRow(player, index))
+        .map((player, index) => createPlayerRow(player, index, page, size))
         .join("");
 }
 
-function createPlayerRow(player, index) {
+
+function createPlayerRow(player, index, page, size) {
+    const rowNumber = page * size + index + 1;
+
     return `
         <tr>
-            <td>${index + 1}</td>
+            <td>${rowNumber}</td>
             <td>${player.name}</td>
             <td>${getKoreanAge(player.birthDate)}</td>
             <td>${player.position ?? "-"}</td>
@@ -85,10 +92,9 @@ function createPlayerRow(player, index) {
 /* =====================
  * 검색
  * ===================== */
-
 function searchPlayers() {
     const keyword = document.getElementById("keyword")?.value ?? "";
-    loadPlayerList(keyword);
+    loadPlayerList(0, keyword);
 }
 
 /* =====================
