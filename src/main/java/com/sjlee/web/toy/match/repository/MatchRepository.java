@@ -90,7 +90,7 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
             m.opponentScore,
             m.result,
             m.status
-   \s""")
+    """)
     MatchDetail findMatchDetail(@Param("matchId") Long matchId);
 
 }

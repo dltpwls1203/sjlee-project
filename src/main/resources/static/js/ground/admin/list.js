@@ -8,9 +8,9 @@ function initGroundList() {
  * Main
  * ===================== */
 
-async function loadGroundList() {
+async function loadGroundList(keyword = "") {
     try {
-        const result = await fetchGroundList();
+        const result = await fetchGroundList(keyword);
 
         if (!result.success) {
             showError(result.error?.message || "구장 목록을 불러오지 못했습니다.");
@@ -19,7 +19,8 @@ async function loadGroundList() {
 
         console.log(result.data);
 
-        renderGroundList(result.data);
+        renderGroundList(result.data.content, result.data.page, result.data.size);
+        renderPagination(result.data, "loadGroundList", keyword);
 
     } catch (err) {
         console.error(err);

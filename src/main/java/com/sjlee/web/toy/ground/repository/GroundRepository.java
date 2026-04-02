@@ -4,6 +4,8 @@ import com.sjlee.web.toy.ground.domain.Ground;
 import com.sjlee.web.toy.ground.dto.GroundList;
 import com.sjlee.web.toy.ground.dto.GroundSelect;
 import com.sjlee.web.toy.match.dto.MatchList;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -11,7 +13,8 @@ import java.util.List;
 
 public interface GroundRepository extends JpaRepository<Ground, Long> {
 
-    @Query("""
+    @Query(
+        value = """
         select new com.sjlee.web.toy.ground.dto.GroundList(
             g.id,
             g.name,
@@ -22,8 +25,12 @@ public interface GroundRepository extends JpaRepository<Ground, Long> {
             g.rentalFee
         )
         from Ground g
+    """,
+        countQuery = """
+            select count(g)
+            from Ground g
     """)
-    List<GroundList> findGroundList();
+    Page<GroundList> findGroundList(Pageable pageable);
 
     @Query("""
         select new com.sjlee.web.toy.ground.dto.GroundSelect(

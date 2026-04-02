@@ -1,12 +1,15 @@
 package com.sjlee.web.toy.ground.controller.api;
 
 import com.sjlee.web.toy.common.response.ApiResponse;
+import com.sjlee.web.toy.common.response.PageResponse;
 import com.sjlee.web.toy.ground.domain.Ground;
 import com.sjlee.web.toy.ground.dto.GroundList;
 import com.sjlee.web.toy.ground.dto.GroundSelect;
 import com.sjlee.web.toy.ground.service.GroundService;
 import com.sjlee.web.toy.match.dto.MatchList;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,9 +25,9 @@ public class GroundApiController {
      * 구장 목록 조회
      */
     @GetMapping
-    public ApiResponse<List<GroundList>> getGroundList() {
-        List<GroundList> grounds = groundService.getGroundList();
-        return ApiResponse.success(grounds);
+    public ApiResponse<PageResponse<GroundList>> getGroundList(Pageable pageable) {
+        Page<GroundList> grounds = groundService.getGroundList(pageable);
+        return ApiResponse.success(new PageResponse<>(grounds));
     }
 
     /**
