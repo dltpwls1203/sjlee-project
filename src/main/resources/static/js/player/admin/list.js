@@ -8,9 +8,9 @@ function initPlayerList() {
  * Main
  * ===================== */
 
-async function loadPlayerList(keyword = "") {
+async function loadPlayerList(page = 0, keyword = "") {
     try {
-        const result = await fetchPlayerList(keyword);
+        const result = await fetchPlayerList(page, keyword);
 
         if (!result.success) {
             showError(result.error?.message || "선수 목록을 불러오지 못했습니다.");
@@ -18,7 +18,7 @@ async function loadPlayerList(keyword = "") {
         }
 
         renderPlayerList(result.data.content, result.data.page, result.data.size);
-        renderPagination(result.data, "loadPlayerList", keyword);
+        renderPagination(result.data, (nextPage) => loadPlayerList(nextPage, keyword));
 
     } catch (err) {
         console.error(err);
@@ -60,7 +60,7 @@ function renderPlayerList(players, page, size) {
 
     if (!players || players.length === 0) {
         tbody.innerHTML = `
-            <tr>
+            <tr>m
                 <td colspan="6" class="text-center">등록된 선수가 없습니다.</td>
             </tr>
         `;

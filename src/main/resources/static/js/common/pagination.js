@@ -1,5 +1,5 @@
 // /js/common/pagination.js
-function renderPagination(pageData,loadFunctionName, keyword = "") {
+function renderPagination(pageData,onPageClick) {
     const pagination = document.getElementById("pagination");
     if (!pagination) return;
 
@@ -15,10 +15,9 @@ function renderPagination(pageData,loadFunctionName, keyword = "") {
     // 이전 버튼
     html += `
         <li class="page-item ${page === 0 ? "disabled" : ""}">
-            <a class="page-link" href="javascript:void(0)"
-               onclick="${loadFunctionName}(${page - 1}, '${keyword}')">
+            <button type="button" class="page-link" data-page="${page - 1}" ${page === 0 ? "disabled" : ""}>
                 이전
-            </a>
+            </button>
         </li>
     `;
 
@@ -26,10 +25,9 @@ function renderPagination(pageData,loadFunctionName, keyword = "") {
     for (let i = 0; i < totalPages; i++) {
         html += `
             <li class="page-item ${i === page ? "active" : ""}">
-                <a class="page-link" href="javascript:void(0)"
-                   onclick="${loadFunctionName}(${i}, '${keyword}')">
+                <button type="button" class="page-link" data-page="${i}">
                     ${i + 1}
-                </a>
+                </button>
             </li>
         `;
     }
@@ -37,12 +35,19 @@ function renderPagination(pageData,loadFunctionName, keyword = "") {
     // 다음 버튼
     html += `
         <li class="page-item ${page === totalPages - 1 ? "disabled" : ""}">
-            <a class="page-link" href="javascript:void(0)"
-               onclick="${loadFunctionName}(${page + 1}, '${keyword}')">
+            <button type="button" class="page-link" data-page="${page + 1}" ${page === totalPages - 1 ? "disabled" : ""}>
                 다음
-            </a>
+            </button>
         </li>
     `;
 
     pagination.innerHTML = html;
+
+    pagination.onclick = function (event) {
+        const target = event.target.closest("[data-page]");
+        if (!target || target.disabled) return;
+
+        const nextPage = Number(target.dataset.page);
+        onPageClick(nextPage);
+    };
 }

@@ -10,6 +10,7 @@ import com.sjlee.web.toy.match.dto.MatchList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public class GroundApiController {
      * 구장 목록 조회
      */
     @GetMapping
-    public ApiResponse<PageResponse<GroundList>> getGroundList(Pageable pageable) {
+    public ApiResponse<PageResponse<GroundList>> getGroundList(@PageableDefault(size = 10, page = 0) Pageable pageable) {
         Page<GroundList> grounds = groundService.getGroundList(pageable);
         return ApiResponse.success(new PageResponse<>(grounds));
     }

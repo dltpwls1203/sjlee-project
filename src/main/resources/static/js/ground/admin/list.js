@@ -8,19 +8,17 @@ function initGroundList() {
  * Main
  * ===================== */
 
-async function loadGroundList(keyword = "") {
+async function loadGroundList(page = 0, keyword = "") {
     try {
-        const result = await fetchGroundList(keyword);
+        const result = await fetchGroundList(page, keyword);
 
         if (!result.success) {
             showError(result.error?.message || "구장 목록을 불러오지 못했습니다.");
             return;
         }
 
-        console.log(result.data);
-
         renderGroundList(result.data.content, result.data.page, result.data.size);
-        renderPagination(result.data, "loadGroundList", keyword);
+        renderPagination(result.data, (nextPage) => loadGroundList(nextPage, keyword));
 
     } catch (err) {
         console.error(err);
@@ -48,7 +46,7 @@ async function fetchGroundList() {
 /* =====================
  * Render
  * ===================== */
-function renderGroundList(grounds) {
+function renderGroundList(grounds, page, size) {
     const tbody = document.getElementById("groundTableBody");
 
     if (!tbody) return;
@@ -63,14 +61,16 @@ function renderGroundList(grounds) {
     }
 
     tbody.innerHTML = grounds
-        .map((ground, index) => createGroundRow(ground, index))
+        .map((ground, index) => createGroundRow(ground, index, page, size))
         .join("");
 }
 
-function createGroundRow(ground, index) {
+function createGroundRow(ground, index, page, size) {
+    const rowNumber = page * size + index + 1;
+
     return `
         <tr>
-            <td>${index + 1}</td> <!-- 화면용 번호 -->
+            <td>${rowNumber}</td>
             <td>${ground.name}</td>
             <td>${ground.location}</td>
             <td>${formatFieldSize(ground.fieldWidth, ground.fieldLength)}</td>
