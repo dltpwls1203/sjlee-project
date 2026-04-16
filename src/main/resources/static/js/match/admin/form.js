@@ -41,7 +41,7 @@ async function loadGrounds() {
  * ===================== */
 async function loadOpponentTeams() {
     try {
-        const response = await fetch("/api/opponent-teams");
+        const response = await fetch("/api/opponent-teams/select");
         const result = await response.json();
 
         if (!result.success) {

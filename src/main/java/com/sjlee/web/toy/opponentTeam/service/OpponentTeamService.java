@@ -16,7 +16,7 @@ public class OpponentTeamService {
     /**
      * 상대팀 목록 조회
      */
-    public List<OpponentTeamSelect> getOpponentTeams() {
+    public List<OpponentTeamSelect> getOpponentTeamSelectList() {
         return opponentTeamRepository.findSelectItems();
     }
 }

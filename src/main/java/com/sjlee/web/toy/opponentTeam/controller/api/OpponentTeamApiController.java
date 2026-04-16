@@ -18,11 +18,11 @@ public class OpponentTeamApiController {
     private final OpponentTeamService opponentTeamService;
 
     /**
-     * 상대팀 목록 조회
+     * 경기 등록 화면 > 상대팀 목록 조회
      */
-    @GetMapping
-    public ApiResponse<List<OpponentTeamSelect>> getOpponentTeams() {
-        return ApiResponse.success(opponentTeamService.getOpponentTeams());
+    @GetMapping("/select")
+    public ApiResponse<List<OpponentTeamSelect>> getOpponentTeamSelectList() {
+        return ApiResponse.success(opponentTeamService.getOpponentTeamSelectList());
     }
 
 }

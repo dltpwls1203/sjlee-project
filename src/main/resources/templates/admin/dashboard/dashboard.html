@@ -1,3 +1,273 @@
 <th:block th:replace="layout/head :: head"></th:block>
 <th:block th:replace="layout/aside :: aside"></th:block>
-준비 중 입니다.
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>대시보드</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">홈</a></li>
+                        <li class="breadcrumb-item active">대시보드</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+            <!-- 팀 매치 기록 -->
+            <div class="card card-primary card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-users mr-2"></i>팀 매치 기록
+                    </h3>
+
+                    <div class="card-tools d-flex align-items-center">
+                        <label for="recentTeamCount" class="mb-0 mr-2">최근 경기</label>
+                        <select id="recentTeamCount" class="form-control form-control-sm" style="width: 100px;">
+                            <option value="3">3경기</option>
+                            <option value="5" selected>5경기</option>
+                            <option value="10">10경기</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3 id="teamWinCnt">4</h3>
+                                    <p>승</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3 id="teamDrawCnt">0</h3>
+                                    <p>무</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3 id="teamLoseCnt">1</h3>
+                                    <p>패</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><span id="teamWinRate">80.0</span><span style="font-size: 20px">%</span></h3>
+                                    <p>승률</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-chart-pie"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-outline card-light">
+                                <div class="card-body text-center">
+                                    <h5 class="mb-3">최근 <span id="teamRecentLabel">5</span>경기 결과</h5>
+                                    <div id="teamRecentResultBadges">
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-danger p-2 mr-1">L</span>
+                                    </div>
+                                    <small class="text-muted d-block mt-3">※ 자체전은 기록에서 제외됩니다.</small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>구분</th>
+                                        <th>승</th>
+                                        <th>무</th>
+                                        <th>패</th>
+                                        <th>승률</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>팀 기록</td>
+                                        <td id="teamSummaryWin">4</td>
+                                        <td id="teamSummaryDraw">0</td>
+                                        <td id="teamSummaryLose">1</td>
+                                        <td><span id="teamSummaryRate">80.0</span>%</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 개인 매치 기록 -->
+            <div class="card card-success card-outline">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-user mr-2"></i>개인 매치 기록
+                    </h3>
+
+                    <div class="card-tools d-flex align-items-center">
+                        <label for="playerId" class="mb-0 mr-2">선수</label>
+                        <select id="playerId" class="form-control form-control-sm mr-3" style="width: 140px;">
+                            <option value="1">심명용</option>
+                            <option value="2">김철수</option>
+                            <option value="3">이영희</option>
+                        </select>
+
+                        <label for="recentPlayerCount" class="mb-0 mr-2">최근 경기</label>
+                        <select id="recentPlayerCount" class="form-control form-control-sm" style="width: 100px;">
+                            <option value="3">3경기</option>
+                            <option value="5" selected>5경기</option>
+                            <option value="10">10경기</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <!-- 선수 이름 강조 영역 -->
+                    <div class="text-center mb-4">
+                        <h2 class="font-weight-bold text-primary mb-1" id="playerDisplayName">
+                            심명용
+                        </h2>
+                        <span class="text-muted">
+                          최근 <span id="playerRecentLabel">5</span>경기 개인 기록
+                        </span>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-success">
+                                <div class="inner">
+                                    <h3 id="playerWinCnt">5</h3>
+                                    <p>승</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-warning">
+                                <div class="inner">
+                                    <h3 id="playerDrawCnt">0</h3>
+                                    <p>무</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-danger">
+                                <div class="inner">
+                                    <h3 id="playerLoseCnt">0</h3>
+                                    <p>패</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                    <h3><span id="playerWinRate">100.0</span><span style="font-size: 20px">%</span></h3>
+                                    <p>승률</p>
+                                </div>
+                                <div class="icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card card-outline card-light">
+                                <div class="card-body text-center">
+                                    <h5 class="mb-3">최근 <span id="playerRecentLabel">5</span>경기 결과</h5>
+                                    <div id="playerRecentResultBadges">
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                        <span class="badge badge-success p-2 mr-1">W</span>
+                                    </div>
+                                    <small class="text-muted d-block mt-3">
+                                        ※ 해당 선수가 참석한 경기만 집계되며, 자체전은 제외됩니다.
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-8">
+                            <div class="table-responsive">
+                                <table class="table table-bordered text-center">
+                                    <thead class="thead-light">
+                                    <tr>
+                                        <th>구분</th>
+                                        <th>승</th>
+                                        <th>무</th>
+                                        <th>패</th>
+                                        <th>승률</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>개인 기록</td>
+                                        <td id="playerSummaryWin">5</td>
+                                        <td id="playerSummaryDraw">0</td>
+                                        <td id="playerSummaryLose">0</td>
+                                        <td><span id="playerSummaryRate">100.0</span>%</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
