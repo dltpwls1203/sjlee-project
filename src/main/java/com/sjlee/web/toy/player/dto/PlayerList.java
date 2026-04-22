@@ -15,7 +15,7 @@ public class PlayerList {
     private final LocalDate birthDate;      // 생년월일
     private final String position;          // 포지션
     private final Integer backNumber;       // 등번호
-    private final Long attendCount;      // 출석 횟수
+    private final Long attendCount;         // 출석 횟수
 
 
 

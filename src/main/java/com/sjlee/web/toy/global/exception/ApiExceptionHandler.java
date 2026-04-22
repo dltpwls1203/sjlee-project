@@ -1,6 +1,6 @@
-package com.sjlee.web.toy.common.exception;
+package com.sjlee.web.toy.global.exception;
 
-import com.sjlee.web.toy.common.response.ApiResponse;
+import com.sjlee.web.toy.global.response.ApiResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

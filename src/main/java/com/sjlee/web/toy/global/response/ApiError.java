@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.common.response;
+package com.sjlee.web.toy.global.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

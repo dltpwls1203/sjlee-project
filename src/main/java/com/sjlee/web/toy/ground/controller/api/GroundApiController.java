@@ -1,12 +1,11 @@
 package com.sjlee.web.toy.ground.controller.api;
 
-import com.sjlee.web.toy.common.response.ApiResponse;
-import com.sjlee.web.toy.common.response.PageResponse;
+import com.sjlee.web.toy.global.response.ApiResponse;
+import com.sjlee.web.toy.global.response.PageResponse;
 import com.sjlee.web.toy.ground.domain.Ground;
 import com.sjlee.web.toy.ground.dto.GroundList;
 import com.sjlee.web.toy.ground.dto.GroundSelect;
 import com.sjlee.web.toy.ground.service.GroundService;
-import com.sjlee.web.toy.match.dto.MatchList;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

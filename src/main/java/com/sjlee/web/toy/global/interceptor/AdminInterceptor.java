@@ -1,4 +1,4 @@
-package com.sjlee.web.toy.common.interceptor;
+package com.sjlee.web.toy.global.interceptor;
 
 import com.sjlee.web.toy.member.domain.Member;
 import com.sjlee.web.toy.member.domain.Permission;

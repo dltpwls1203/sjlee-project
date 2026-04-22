@@ -19,11 +19,11 @@ public class OpponentTeam {
     @Column(nullable = false, length = 100)
     private String name;    // 상대팀 명
 
-    @Column(name = "contact_info", length = 100)
-    private String contactInfo;    // 연락처 정보
-
     @Column(name = "skill_level", length = 20)
-    private String skillLevel;     // 체감 실력 (LOW / MID / HIGH 등)
+    private String skillLevel;     // 체감 실력 (B-/C+ 등)
+
+    @Column(name = "age_range", length = 200)
+    private String ageRange;        // 나이대
 
     @Column(length = 200)
     private String note;            // 비고

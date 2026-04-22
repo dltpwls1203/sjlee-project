@@ -1,6 +1,6 @@
 package com.sjlee.web.toy.member.service.Impl;
 
-import com.sjlee.web.toy.common.exception.DuplicateUserIdException;
+import com.sjlee.web.toy.global.exception.DuplicateUserIdException;
 import com.sjlee.web.toy.member.domain.Member;
 import com.sjlee.web.toy.member.dto.LoginRequest;
 import com.sjlee.web.toy.member.dto.MemberCreateRequest;

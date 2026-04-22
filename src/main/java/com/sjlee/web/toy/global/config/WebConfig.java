@@ -1,6 +1,6 @@
-package com.sjlee.web.toy.common.config;
+package com.sjlee.web.toy.global.config;
 
-import com.sjlee.web.toy.common.interceptor.AdminInterceptor;
+import com.sjlee.web.toy.global.interceptor.AdminInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

@@ -49,8 +49,8 @@ public interface MatchRepository extends JpaRepository<Match, Long> {
         order by m.matchAt desc
     """,
             countQuery = """
-        select count(p)
-        from Player p
+        select count(m)
+        from Match m
     """)
     Page<MatchList> findMatchList(Pageable pageable);
 

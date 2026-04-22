@@ -7,14 +7,16 @@ public enum MemberRole {
             Permission.ADMIN_DASHBOARD,
             Permission.ADMIN_MATCH,
             Permission.ADMIN_PLAYER,
-            Permission.ADMIN_GROUND
+            Permission.ADMIN_GROUND,
+            Permission.ADMIN_OPPONENT_TEAM
     )),
 
     ADMIN(Set.of(
             Permission.ADMIN_DASHBOARD,
             Permission.ADMIN_MATCH,
             Permission.ADMIN_PLAYER,
-            Permission.ADMIN_GROUND
+            Permission.ADMIN_GROUND,
+            Permission.ADMIN_OPPONENT_TEAM
     )),
 
     USER(Set.of()); // 관리자 메뉴 없음
