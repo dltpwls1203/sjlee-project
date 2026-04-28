@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"></th:block>
+  <title>상대팀 등록</title>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- 사이드바 -->
+  <th:block th:replace="layout/aside :: aside"></th:block>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <h1>상대팀 등록</h1>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+
+          <form id="opponentTeamForm">
+
+            <!-- 상대팀 명 -->
+            <div class="form-group">
+              <label>상대팀 명</label>
+              <input type="text"
+                     id="name"
+                     class="form-control"
+                     placeholder="상대팀 명 입력">
+            </div>
+
+            <!-- 상대팀 실력 -->
+            <div class="form-group">
+              <label>상대팀 실력</label>
+              <select id="skillLevel" class="form-control">
+                <option value="">선택 안 함</option>
+                <option value="A+">A+</option>
+                <option value="A">A</option>
+                <option value="A-">A-</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="B-">B-</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="C-">C-</option>
+              </select>
+            </div>
+
+            <!-- 나이대 -->
+            <div class="form-group">
+              <label>나이대</label>
+              <input type="text"
+                     id="ageRange"
+                     class="form-control"
+                     placeholder="ex) 30대초반">
+            </div>
+
+
+            <div class="text-right mt-4">
+              <button type="button" id="btnSave" class="btn btn-primary">
+                저장
+              </button>
+              <a href="/admin/opponent-teams" class="btn btn-secondary">
+                취소
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="/js/opponentTeam/admin/form.js"></script>
+</body>
+</html>

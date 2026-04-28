@@ -8,9 +8,9 @@ function initMatchList() {
  * Main
  * ===================== */
 
-async function loadMatchList(keyword = "") {
+async function loadMatchList(page = 0, keyword = "") {
     try {
-        const result = await fetchMatchList(keyword);
+        const result = await fetchMatchList(page, keyword);
 
         if (!result.success) {
             showError(result.error?.message || "경기 목록을 불러오지 못했습니다.");
@@ -18,7 +18,7 @@ async function loadMatchList(keyword = "") {
         }
 
         renderMatchList(result.data.content, result.data.page, result.data.size);
-        renderPagination(result.data, "loadMatchList", keyword);
+        renderPagination(result.data, (nextPage) => loadMatchList(nextPage, keyword));
 
     } catch (err) {
         console.error(err);

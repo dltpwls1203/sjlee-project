@@ -17,4 +17,12 @@ public class OpponentTeamController {
     public String opponentTeamList() {
         return "opponentTeam/admin/list";
     }
+
+    /**
+     * 관리자 상대팀 등록 화면
+     */
+    @GetMapping("/new")
+    public String createOpponentTeamForm() {
+        return "opponentTeam/admin/form";
+    }
 }
