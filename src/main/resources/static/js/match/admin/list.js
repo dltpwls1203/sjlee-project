@@ -1,16 +1,19 @@
 document.addEventListener("DOMContentLoaded", initMatchList);
 
 function initMatchList() {
+    bindSearchEvent();
     loadMatchList();
 }
 
 /* =====================
  * Main
  * ===================== */
+async function loadMatchList(page = 0) {
 
-async function loadMatchList(page = 0, keyword = "") {
     try {
-        const result = await fetchMatchList(page, keyword);
+        const condition = getSearchCondition();
+
+        const result = await fetchMatchList(page, condition);
 
         if (!result.success) {
             showError(result.error?.message || "경기 목록을 불러오지 못했습니다.");
@@ -18,29 +21,91 @@ async function loadMatchList(page = 0, keyword = "") {
         }
 
         renderMatchList(result.data.content, result.data.page, result.data.size);
-        renderPagination(result.data, (nextPage) => loadMatchList(nextPage, keyword));
+
+        renderPagination(result.data,
+            (nextPage) => loadMatchList(nextPage));
 
     } catch (err) {
+
         console.error(err);
         showError("서버와 통신 중 오류가 발생했습니다.");
+
     }
+
+}
+
+/* =====================
+ * 검색 이벤트
+ * ===================== */
+function bindSearchEvent() {
+
+    document.getElementById("btnSearch")
+        ?.addEventListener("click", () => loadMatchList());
+
+    document.getElementById("btnReset")
+        ?.addEventListener("click", () => {
+            document.getElementById("searchForm").reset();
+            loadMatchList();
+        });
+
+    document.getElementById("searchForm")
+        ?.addEventListener("submit", (e) => {
+            e.preventDefault();
+            loadMatchList();
+        });
+}
+
+/* =====================
+ * 검색조건
+ * ===================== */
+function getSearchCondition() {
+
+    return {
+        matchMonth : document.getElementById("matchMonth")?.value ?? "",
+        opponentName : document.getElementById("opponentName")?.value.trim() ?? "",
+        result : document.getElementById("result")?.value ?? "",
+        matchType : document.getElementById("matchType")?.value ?? "",
+        groundName : document.getElementById("groundName")?.value.trim() ?? ""
+    };
+
 }
 
 /* =====================
  * 매치 목록 API
  * ===================== */
-async function fetchMatchList(page = 0, keyword = "") {
+async function fetchMatchList(page = 0, condition = {}) {
+
     const params = new URLSearchParams();
+
     params.append("page", page);
     params.append("size", 10);
 
-    if (keyword) {
-        params.append("keyword", keyword);
+    if (condition.matchMonth) {
+        params.append("matchMonth", condition.matchMonth);
     }
+
+    if (condition.opponentName) {
+        params.append("opponentName", condition.opponentName);
+    }
+
+    if (condition.result) {
+        params.append("result", condition.result);
+    }
+
+    if (condition.matchType) {
+        params.append("matchType", condition.matchType);
+    }
+
+    if (condition.groundName) {
+        params.append("groundName", condition.groundName);
+    }
+
 
     const response = await fetch(`/api/matches?${params.toString()}`, {
         method: "GET",
-        headers: { "Accept": "application/json" }
+        headers: {
+            "Accept": "application/json"
+        }
     });
 
     if (!response.ok) {

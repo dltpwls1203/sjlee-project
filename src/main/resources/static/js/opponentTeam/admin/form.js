@@ -44,7 +44,7 @@ async function submitOpponentTeam() {
         }
 
         alert("상대팀 정보가 등록되었습니다.");
-        location.href = "/admin/opponentTeams";
+        location.href = "/admin/opponent-teams";
 
     } catch (e) {
         console.error(e);

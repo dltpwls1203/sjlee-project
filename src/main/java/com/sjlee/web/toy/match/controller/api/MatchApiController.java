@@ -8,6 +8,7 @@ import com.sjlee.web.toy.global.response.PageResponse;
 import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
+import com.sjlee.web.toy.match.dto.MatchSearchCondition;
 import com.sjlee.web.toy.match.service.MatchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,8 +30,8 @@ public class MatchApiController {
      * 경기 목록 조회
      */
     @GetMapping
-    public ApiResponse<PageResponse<MatchList>> getMatchList(@PageableDefault(size = 10, page = 0) Pageable pageable) {
-        Page<MatchList> matches = matchService.getMatchList(pageable);
+    public ApiResponse<PageResponse<MatchList>> getMatchList(MatchSearchCondition condition, @PageableDefault(size = 10, page = 0) Pageable pageable) {
+        Page<MatchList> matches = matchService.getMatchList(condition, pageable);
         return ApiResponse.success(new PageResponse<>(matches));
     }
 

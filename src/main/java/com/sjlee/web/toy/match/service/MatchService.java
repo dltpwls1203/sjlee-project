@@ -5,6 +5,7 @@ import com.sjlee.web.toy.match.domain.MatchResult;
 import com.sjlee.web.toy.match.domain.MatchStatus;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
+import com.sjlee.web.toy.match.dto.MatchSearchCondition;
 import com.sjlee.web.toy.match.repository.MatchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -24,8 +25,8 @@ public class MatchService {
     /**
      * 경기 목록 조회
      */
-    public Page<MatchList> getMatchList(Pageable pageable) {
-        return matchRepository.findMatchList(pageable);
+    public Page<MatchList> getMatchList(MatchSearchCondition condition, Pageable pageable) {
+        return matchRepository.findMatchList(condition, pageable);
     }
 
     /**
