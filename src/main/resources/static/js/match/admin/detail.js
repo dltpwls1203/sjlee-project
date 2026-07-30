@@ -50,23 +50,30 @@ function bindDetail(data) {
     setValue("opponentScore", data.opponentScore);
     setValue("attendanceCount", data.attendanceCount);
 
-    handleStatusChange();
 }
 
 /* =====================
- * 구장 선택 옵션
+ * 구장 정보 가져오기
  * ===================== */
-
 async function loadGrounds() {
-    const response = await fetch("/api/grounds");
-    const result = await response.json();
+    try {
+        const response = await fetch("/api/grounds/select");
+        const result = await response.json();
 
-    if (!result.success) return;
+        if (!result.success) {
+            alert("구장 정보를 불러오지 못했습니다.");
+            return;
+        }
 
-    const select = document.getElementById("groundId");
-    result.data.forEach(ground =>
-        select.appendChild(createOption(ground.id, ground.name))
-    );
+        const select = document.getElementById("groundId");
+        result.data.forEach(ground => {
+            select.appendChild(createOption(ground.id, ground.name));
+        });
+
+    } catch (e) {
+        console.error(e);
+        alert("구장 조회 중 오류가 발생했습니다.");
+    }
 }
 
 /* =====================
@@ -95,7 +102,6 @@ function createOption(value, text) {
 /* =====================
  * 수정 모드
  * ===================== */
-
 function enableEditMode() {
     toggleFormDisabled(false);
 
@@ -120,7 +126,6 @@ function toggleFormDisabled(disabled) {
 /* =====================
  * Status Rule Handling
  * ===================== */
-
 function handleStatusChange() {
     const status = getValue("status");
 
