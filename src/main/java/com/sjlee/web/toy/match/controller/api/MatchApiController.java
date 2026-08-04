@@ -9,6 +9,7 @@ import com.sjlee.web.toy.match.domain.Match;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.dto.MatchSearchCondition;
+import com.sjlee.web.toy.match.dto.MatchUpdateRequest;
 import com.sjlee.web.toy.match.service.MatchService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -41,6 +42,18 @@ public class MatchApiController {
     @PostMapping
     public ApiResponse<Long> createMatch(@RequestBody Match match) {
         Long matchId = matchService.createMatch(match);
+        return ApiResponse.success(matchId);
+    }
+
+    /**
+     * 경기 수정
+     */
+    @PutMapping("/{matchId}")
+    public ApiResponse<Long> updateMatch(
+            @PathVariable Long matchId,
+            @RequestBody MatchUpdateRequest request) {
+
+        matchService.updateMatch(matchId, request);
         return ApiResponse.success(matchId);
     }
 

@@ -160,7 +160,7 @@ async function submitUpdate() {
     };
 
     try {
-        const response = await fetch(`/api/admin/matches/${matchId}`, {
+        const response = await fetch(`/api/matches/${matchId}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(body)

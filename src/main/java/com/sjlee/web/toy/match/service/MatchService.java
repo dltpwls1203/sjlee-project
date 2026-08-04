@@ -6,6 +6,7 @@ import com.sjlee.web.toy.match.domain.MatchStatus;
 import com.sjlee.web.toy.match.dto.MatchDetail;
 import com.sjlee.web.toy.match.dto.MatchList;
 import com.sjlee.web.toy.match.dto.MatchSearchCondition;
+import com.sjlee.web.toy.match.dto.MatchUpdateRequest;
 import com.sjlee.web.toy.match.repository.MatchRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -37,6 +38,25 @@ public class MatchService {
         // 경기 점수에 따른 result 값 설정
         match.calculateResult();
         return matchRepository.save(match).getId();
+    }
+
+    /**
+     * 경기 수정
+     */
+    @Transactional
+    public void updateMatch(Long matchId, MatchUpdateRequest request) {
+
+        Match match = matchRepository.findById(matchId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 경기입니다."));
+
+        match.update(
+                request.getMatchAt(),
+                request.getGroundId(),
+                request.getOpponentTeamId(),
+                request.getStatus(),
+                request.getOurScore(),
+                request.getOpponentScore()
+        );
     }
 
 

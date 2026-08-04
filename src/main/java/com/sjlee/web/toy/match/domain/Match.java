@@ -88,4 +88,22 @@ public class Match {
             this.result = MatchResult.DRAW;
         }
     }
+
+    public void update(
+            LocalDateTime matchAt,
+            Long groundId,
+            Long opponentTeamId,
+            MatchStatus status,
+            Integer ourScore,
+            Integer opponentScore) {
+
+        this.matchAt = matchAt;
+        this.groundId = groundId;
+        this.opponentTeamId = opponentTeamId;
+        this.status = status;
+        this.ourScore = ourScore;
+        this.opponentScore = opponentScore;
+
+        calculateResult();
+    }
 }
