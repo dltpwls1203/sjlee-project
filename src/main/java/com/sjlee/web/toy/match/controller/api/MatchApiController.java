@@ -58,7 +58,7 @@ public class MatchApiController {
     }
 
     /**
-     * 관리자 경기 상세 정보
+     * 경기 상세 정보
      */
     @GetMapping("/{matchId}")
     public ApiResponse<MatchDetail> matchDetail(@PathVariable Long matchId) {

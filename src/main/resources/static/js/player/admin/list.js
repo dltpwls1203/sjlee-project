@@ -87,9 +87,9 @@ function createPlayerRow(player, index, page, size) {
             <td class="text-center">
                 <button type="button"
                         class="btn btn-sm btn-outline-primary"
-                        title="선수 수정"
+                        title="선수 상세"
                         onclick="goToPlayerDetail(${player.playerId})">
-                    <i class="fas fa-edit"></i> 수정
+                    <i class="fas fa-edit"></i> 상세
                 </button>
             </td>
         </tr>

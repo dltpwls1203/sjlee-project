@@ -63,4 +63,11 @@ public class Player {
         this.playerType = (this.playerType == null) ? PlayerType.REGULAR : this.playerType;
         this.useYn = (this.useYn == null) ? "Y" : this.useYn;
     }
+
+    public void update(String playerName, LocalDate birthDate, String position, Integer backNumber) {
+        this.name = playerName;
+        this.birthDate = birthDate;
+        this.position = position;
+        this.backNumber = backNumber;
+    }
 }
