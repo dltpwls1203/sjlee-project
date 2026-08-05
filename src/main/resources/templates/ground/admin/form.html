@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"></th:block>
+  <title>구장 등록</title>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- 사이드바 -->
+  <th:block th:replace="layout/aside :: aside"></th:block>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <h1>구장 등록</h1>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+
+          <form id="groundForm">
+            <!-- 구장 이름 -->
+            <div class="form-group">
+              <label>구장 이름</label>
+              <input type="text"
+                     id="name"
+                     class="form-control"
+                     placeholder="ex) 충현고등학교">
+            </div>
+
+            <!-- 구장 위치 -->
+            <div class="form-group">
+              <label>위치</label>
+              <input type="text"
+                     id="location"
+                     class="form-control"
+                     placeholder="ex) 경기도 광명시 소하2동 오리로348번길 62">
+            </div>
+
+            <!-- 구장 너비 -->
+            <div class="form-group">
+              <label>구장 너비(m)</label>
+              <input type="number"
+                     id="fieldWidth"
+                     class="form-control"
+                     min="0"
+                     placeholder="ex) 20">
+            </div>
+
+            <!-- 구장 길이-->
+            <div class="form-group">
+              <label>구장 길이(m)</label>
+              <input type="number"
+                     id="fieldLength"
+                     class="form-control"
+                     min="0"
+                     placeholder="ex) 40">
+            </div>
+
+            <!-- 경기 형태-->
+            <div class="form-group">
+              <label>경기 형태</label>
+              <input type="number"
+                     id="playersPerTeam"
+                     class="form-control"
+                     min="0"
+                     placeholder="ex) 9">
+            </div>
+
+            <!-- 대여료-->
+            <div class="form-group">
+              <label>대여료</label>
+              <input type="number"
+                     id="rentalFee"
+                     class="form-control"
+                     min="0"
+                     placeholder="ex) 40000">
+            </div>
+
+            <div class="text-right mt-4">
+              <button type="button" id="btnSave" class="btn btn-primary">
+                저장
+              </button>
+              <a href="/admin/grounds" class="btn btn-secondary">
+                취소
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="/js/ground/admin/form.js"></script>
+</body>
+</html>

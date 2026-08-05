@@ -1,0 +1,39 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+
+    <!-- Brand -->
+    <a th:href="@{/admin}" class="brand-link">
+        <span class="brand-text font-weight-light">Admin</span>
+    </a>
+
+    <div class="sidebar">
+
+        <!-- 사용자 정보 -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="info">
+                <a href="#" class="d-block"
+                   th:text="${session.LOGIN_MEMBER.name}">Admin</a>
+            </div>
+        </div>
+
+        <!-- 메뉴 -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column">
+
+                <li class="nav-item"
+                    th:each="menu : ${menus}">
+
+                    <a th:href="@{${menu.url}}"
+                       class="nav-link"
+                       th:classappend="${currentUri != null and currentUri.startsWith(menu.url)} ? ' active' : ''">
+
+                        <i class="nav-icon"></i>
+                        <p th:text="${menu.title}">Menu</p>
+                    </a>
+
+                </li>
+
+            </ul>
+        </nav>
+
+    </div>
+</aside>

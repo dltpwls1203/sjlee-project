@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"></th:block>
+  <title>경기 등록</title>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- 사이드바 -->
+  <th:block th:replace="layout/aside :: aside"></th:block>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="content-wrapper">
+
+    <section class="content-header">
+      <h1>경기 등록</h1>
+    </section>
+
+    <section class="content">
+      <div class="card">
+        <div class="card-body">
+
+          <form id="matchForm">
+
+            <!-- 경기 일시 -->
+            <div class="form-group">
+              <label>경기 일시 <span class="text-danger">*</span></label>
+              <input type="datetime-local"
+                     id="matchAt"
+                     class="form-control"
+                     required>
+            </div>
+
+            <!-- 구장 -->
+            <div class="form-group">
+              <label>구장</label>
+              <select id="groundId" class="form-control">
+                <option value="">선택 안 함</option>
+                <!-- 추후 팝업 연동 -->
+              </select>
+            </div>
+
+            <!-- 경기상태 -->
+            <div class="form-group">
+              <label>경기 유형</label>
+              <select id="matchType" class="form-control">
+                <option value="">선택 안 함</option>
+              </select>
+            </div>
+
+            <!-- 우리 팀 (고정) -->
+            <div class="form-group">
+              <label>우리 팀</label>
+              <select class="form-control" disabled>
+                <option>카리스FC</option>
+              </select>
+              <input type="hidden" id="teamId" value="1">
+            </div>
+
+            <!-- 상대 팀 -->
+            <div class="form-group">
+              <label>상대 팀</label>
+              <select id="opponentTeamId" class="form-control">
+                <option value="">선택 안 함</option>
+                <!-- 추후 팝업 연동 -->
+              </select>
+            </div>
+
+            <!-- 경기 상태 -->
+            <div class="form-group">
+              <label>경기 상태 <span class="text-danger">*</span></label>
+              <select id="status" class="form-control" required>
+                <option value="">선택</option>
+                <option value="SCHEDULED">SCHEDULED</option>
+                <option value="DONE">DONE</option>
+              </select>
+            </div>
+
+            <!-- 점수 -->
+            <div class="form-group">
+              <label>우리팀 점수</label>
+              <input type="number"
+                     id="ourScore"
+                     class="form-control"
+                     min="0"
+                     disabled>
+            </div>
+
+            <div class="form-group">
+              <label>상대팀 점수</label>
+              <input type="number"
+                     id="opponentScore"
+                     class="form-control"
+                     min="0"
+                     disabled>
+            </div>
+
+            <div class="text-right mt-4">
+              <button type="button" id="btnSave" class="btn btn-primary">
+                저장
+              </button>
+              <a href="/admin/matches" class="btn btn-secondary">
+                취소
+              </a>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<script src="/js/match/admin/form.js"></script>
+</body>
+</html>

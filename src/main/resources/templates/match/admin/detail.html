@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <th:block th:replace="layout/head :: head"></th:block>
+  <title>경기 상세</title>
+</head>
+
+<body>
+<div class="wrapper">
+
+  <!-- 사이드바 -->
+  <th:block th:replace="layout/aside :: aside"></th:block>
+
+  <!-- 메인 컨텐츠 -->
+  <div class="content-wrapper">
+
+    <!-- 헤더 -->
+    <section class="content-header">
+      <h1>경기 상세</h1>
+    </section>
+
+    <!-- 본문 -->
+    <section class="content">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h3 class="card-title">경기 정보</h3>
+
+          <div>
+            <button type="button" id="editBtn" class="btn btn-warning btn-sm">
+              수정
+            </button>
+            <button type="button" id="saveBtn" class="btn btn-primary btn-sm d-none">
+              저장
+            </button>
+            <button type="button"
+                    id="listBtn"
+                    class="btn btn-secondary btn-sm"
+                    onclick="location.href='/admin/matches'">
+              목록
+            </button>
+          </div>
+        </div>
+
+        <div class="card-body">
+
+          <form id="matchDetailForm">
+
+            <!-- 경기 일시 -->
+            <div class="form-group">
+              <label>경기 일시 <span class="text-danger">*</span></label>
+              <input type="datetime-local"
+                     id="matchAt"
+                     class="form-control"
+                     disabled>
+            </div>
+
+            <!-- 구장 -->
+            <div class="form-group">
+              <label>구장</label>
+              <select id="groundId"
+                      class="form-control"
+                      disabled>
+                <option value="">선택 안 함</option>
+              </select>
+            </div>
+
+            <!-- 우리 팀 (고정) -->
+            <div class="form-group">
+              <label>우리 팀</label>
+              <select class="form-control" disabled>
+                <option>카리스FC</option>
+              </select>
+            </div>
+
+            <!-- 상대 팀 -->
+            <div class="form-group">
+              <label>상대 팀</label>
+              <select id="opponentTeamId"
+                      class="form-control"
+                      disabled>
+                <option value="">선택 안 함</option>
+              </select>
+            </div>
+
+            <!-- 경기 상태 -->
+            <div class="form-group">
+              <label>경기 상태 <span class="text-danger">*</span></label>
+              <select id="status"
+                      class="form-control"
+                      disabled>
+                <option value="SCHEDULED">SCHEDULED</option>
+                <option value="DONE">DONE</option>
+              </select>
+            </div>
+
+            <!-- 점수 -->
+            <div class="form-group">
+              <label>우리팀 점수</label>
+              <input type="number"
+                     id="ourScore"
+                     class="form-control"
+                     min="0"
+                     disabled>
+            </div>
+
+            <div class="form-group">
+              <label>상대팀 점수</label>
+              <input type="number"
+                     id="opponentScore"
+                     class="form-control"
+                     min="0"
+                     disabled>
+            </div>
+
+            <!-- 출석 인원 -->
+            <div class="form-group">
+              <label>출석 인원 수</label>
+              <div class="input-group">
+                <input type="text"
+                       id="attendanceCount"
+                       class="form-control"
+                       readonly>
+                <div class="input-group-append">
+                  <button type="button"
+                          id="attendanceBtn"
+                          class="btn btn-outline-primary">
+                    명단 보기
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<!-- Attendance Modal -->
+<div class="modal fade" id="attendanceModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">출석 인원 명단</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 🔥 액션 버튼 -->
+        <div class="mb-2 d-flex justify-content-between">
+          <div>
+            <button type="button"
+                    class="btn btn-success btn-sm"
+                    onclick="updateAttendance('ATTEND')">
+              참석
+            </button>
+
+            <button type="button"
+                    class="btn btn-danger btn-sm"
+                    onclick="updateAttendance('ABSENT')">
+              불참
+            </button>
+          </div>
+
+          <div>
+            <span class="text-muted">선택한 선수 일괄 변경</span>
+          </div>
+        </div>
+
+        <!-- 테이블 -->
+        <table class="table table-bordered table-sm">
+          <thead>
+          <tr>
+            <th>
+              <input type="checkbox" id="checkAll">
+            </th>
+            <th>이름</th>
+            <th>상태</th>
+          </tr>
+          </thead>
+          <tbody id="attendanceTableBody">
+          </tbody>
+        </table>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          닫기
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- matchId 주입 -->
+<script th:inline="javascript">
+  const matchId = /*[[${matchId}]]*/ 0;
+</script>
+
+<script src="/js/match/admin/detail.js"></script>
+</body>
+</html>
