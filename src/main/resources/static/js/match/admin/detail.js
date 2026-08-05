@@ -107,6 +107,29 @@ function enableEditMode() {
 
     document.getElementById("editBtn").classList.add("d-none");
     document.getElementById("saveBtn").classList.remove("d-none");
+
+    const listBtn = document.getElementById("listBtn");
+    listBtn.textContent = "취소";
+    listBtn.removeAttribute("href");   // 이동 막기
+    listBtn.onclick = cancelEdit;
+
+}
+
+async function cancelEdit(e) {
+
+    e.preventDefault();
+
+    await loadMatchDetail();
+
+    toggleFormDisabled(true);
+
+    document.getElementById("saveBtn").classList.add("d-none");
+    document.getElementById("editBtn").classList.remove("d-none");
+
+    const listBtn = document.getElementById("listBtn");
+    listBtn.textContent = "목록";
+    listBtn.href = "/admin/matches";
+    listBtn.onclick = null;
 }
 
 function toggleFormDisabled(disabled) {
